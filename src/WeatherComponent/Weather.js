@@ -42,15 +42,23 @@ class Weather extends Component {
   }
 
   render() {
-    return (
-      <div className='weather'>
-        <Info
-          temp={this.state.temp}
-          humidity={this.state.humidity}
-          wind={this.state.wind}
-        />
-      </div>
-    );
+    if (this.state.temp === '') {
+      return (
+        <div className='weather'>
+          <h3>Loading...</h3>
+        </div>
+      );
+    } else {
+      return (
+        <div className='weather'>
+          <Info
+            temp={this.state.temp}
+            humidity={this.state.humidity}
+            wind={this.state.wind}
+          />
+        </div>
+      );
+    }
   }
 }
 
