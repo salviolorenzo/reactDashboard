@@ -1,14 +1,76 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+html,
+body,
+.App,
+#root,
+.dashboard {
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard {
+  background-color: #f7f7f7;
+}
+
+h1 {
+  margin: 0 0 5px 0;
+}
+
+/* NOTEPAD */
+
+.notepad {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px 5px;
+  padding: 10px 0;
+  border-radius: 5px;
+  background-color: rgb(252, 228, 150);
+}
+
+.notepad h2 {
+  margin: 5px 0;
+}
+
+.note-list {
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.note-list li {
+  padding: 5px;
+  margin: 2px 0;
+  border-radius: 10px;
+  background-color: rgb(254, 246, 204);
+  width: 50%;
+}
+
+.editor {
+  width: 100%;
+}
+
+.editor textarea {
+  min-width: 50%;
+  max-width: 100%;
+  border-radius: 5px;
+  background-color: rgb(254, 246, 204);
 }

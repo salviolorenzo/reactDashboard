@@ -12,10 +12,10 @@ class Dashboard extends Component {
   render() {
     return (
       <div className='dashboard'>
-        Main body
+        <h1>Dashboard</h1>
+        <Todos />
+        {/* <Weather /> */}
         <Notepad />
-        {/* <Todos />
-        <Weather /> */}
       </div>
     );
   }

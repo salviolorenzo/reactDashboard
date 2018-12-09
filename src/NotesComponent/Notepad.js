@@ -74,6 +74,7 @@ class Notepad extends Component {
   render() {
     return (
       <div className='notepad'>
+        <h2>Notes</h2>
         <Noteslist
           items={this.state.notes}
           onClick={this._onClick.bind(this)}
