@@ -6,6 +6,7 @@ function Noteslist(props) {
       {props.items.map(item => {
         return (
           <li
+            key={item.id}
             onClick={() => {
               props.onClick(item);
             }}
@@ -14,6 +15,7 @@ function Noteslist(props) {
           </li>
         );
       })}
+      <li onClick={props.handleNewNote}>New note</li>
     </ul>
   );
 }

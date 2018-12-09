@@ -34,9 +34,40 @@ class Notepad extends Component {
     });
   }
 
-  _onChange(note) {
+  _onChange(note, event) {
+    note.content = event.target.value;
+    console.log(event.target.value);
+    let newArray = this.state.notes.map(item => {
+      if (item.id === note.id) {
+        return note;
+      } else {
+        return item;
+      }
+    });
     this.setState({
-      notes: [...this.state.notes, note]
+      notes: newArray
+    });
+  }
+
+  // _getById(idToFind) {
+  //   let note = this.state.notes.filter(item => {
+  //     if (item.id === idToFind) {
+  //       return item;
+  //     }
+  //   });
+  //   return note;
+  // }
+
+  _handleNewNote(event) {
+    console.log('new');
+    let randomId = Math.floor(Math.random() * 100);
+    let newNote = {
+      id: randomId,
+      title: `Note ${randomId}`,
+      content: ''
+    };
+    this.setState({
+      notes: [...this.state.notes, newNote]
     });
   }
 
@@ -46,6 +77,7 @@ class Notepad extends Component {
         <Noteslist
           items={this.state.notes}
           onClick={this._onClick.bind(this)}
+          handleNewNote={this._handleNewNote.bind(this)}
         />
         <Editor
           content={this.state.focus}
