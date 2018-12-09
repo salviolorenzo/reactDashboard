@@ -20,20 +20,39 @@ body,
 .dashboard {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 .dashboard {
   background-color: #f7f7f7;
+  color: white;
+  text-shadow: 0 1px 1px #000000;
 }
 
 h1 {
   margin: 0 0 5px 0;
 }
 
+.notepad,
+.todos {
+  color: black;
+  text-shadow: none;
+}
+
 /* NOTEPAD */
 
 .notepad {
-  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -41,9 +60,10 @@ h1 {
   padding: 10px 0;
   border-radius: 5px;
   background-color: rgb(252, 228, 150);
+  opacity: 0.9;
 }
 
-.notepad h2 {
+h2 {
   margin: 5px 0;
 }
 
@@ -73,4 +93,46 @@ h1 {
   max-width: 100%;
   border-radius: 5px;
   background-color: rgb(254, 246, 204);
+}
+
+/* TODOS */
+
+.todos {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  justify-content: center;
+  padding: 10px;
+  margin: 10px 5px;
+  background-color: rgb(182, 231, 254);
+  border-radius: 5px;
+  opacity: 0.9;
+}
+
+.todo-list {
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-list li {
+  padding: 5px;
+  margin: 2px 0;
+  width: 50%;
+  background-color: rgb(247, 252, 255);
+  border-radius: 10px;
+}
+
+.todo-form {
+  min-width: 50%;
+}
+
+.todo-form input {
+  width: 100%;
+  padding: 3px;
+  margin: 2px 0;
+  border-radius: 5px;
 }
