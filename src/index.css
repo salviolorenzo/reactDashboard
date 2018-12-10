@@ -69,11 +69,11 @@ h1 {
   opacity: 0.9;
 }
 
-.notepad:hover,
+/* .notepad:hover,
 .todos:hover,
 .weather:hover {
   cursor: move;
-}
+} */
 
 /* NOTEPAD */
 h2 {
@@ -95,6 +95,14 @@ h2 {
   border-radius: 10px;
   background-color: rgb(254, 246, 204);
   width: 50%;
+}
+
+.note-list div {
+  display: inline;
+  position: relative;
+  left: 25%;
+  /* background-color: #f2f2f2; */
+  color: red;
 }
 
 .note-list li:hover {

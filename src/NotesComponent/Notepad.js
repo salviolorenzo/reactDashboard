@@ -29,7 +29,7 @@ class Notepad extends Component {
   }
 
   _onClick(note) {
-    console.log(note);
+    // console.log(note);
     this.setState({
       focus: note
     });
@@ -61,33 +61,43 @@ class Notepad extends Component {
 
   _handleNewNote(event) {
     console.log('new');
-    let randomId = Math.floor(Math.random() * 100);
+    let newId = this.state.notes.length + 1;
     let newNote = {
-      id: randomId,
-      title: `Note ${randomId}`,
+      id: newId,
+      title: `Note ${newId}`,
       content: ''
     };
     this.setState({
-      notes: [...this.state.notes, newNote]
+      notes: [...this.state.notes, newNote],
+      focus: newNote
+    });
+  }
+
+  _handleDelete(item) {
+    let index = this.state.notes.indexOf(item);
+    let array = this.state.notes;
+    array.splice(index, 1);
+    this.setState({
+      notes: array,
+      focus: ''
     });
   }
 
   render() {
     return (
-      <Draggable>
-        <div className='notepad'>
-          <h2>Notes</h2>
-          <Noteslist
-            items={this.state.notes}
-            onClick={this._onClick.bind(this)}
-            handleNewNote={this._handleNewNote.bind(this)}
-          />
-          <Editor
-            content={this.state.focus}
-            onChange={this._onChange.bind(this)}
-          />
-        </div>
-      </Draggable>
+      <div className='notepad'>
+        <h2>Notes</h2>
+        <Noteslist
+          items={this.state.notes}
+          onClick={this._onClick.bind(this)}
+          handleNewNote={this._handleNewNote.bind(this)}
+          handleDelete={this._handleDelete.bind(this)}
+        />
+        <Editor
+          content={this.state.focus}
+          onChange={this._onChange.bind(this)}
+        />
+      </div>
     );
   }
 }

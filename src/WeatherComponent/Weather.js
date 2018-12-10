@@ -51,15 +51,13 @@ class Weather extends Component {
       );
     } else {
       return (
-        <Draggable>
-          <div className='weather'>
-            <Info
-              temp={this.state.temp}
-              humidity={this.state.humidity}
-              wind={this.state.wind}
-            />
-          </div>
-        </Draggable>
+        <div className='weather'>
+          <Info
+            temp={this.state.temp}
+            humidity={this.state.humidity}
+            wind={this.state.wind}
+          />
+        </div>
       );
     }
   }

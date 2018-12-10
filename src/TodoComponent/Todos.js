@@ -47,17 +47,15 @@ class Todos extends Component {
 
   render() {
     return (
-      <Draggable>
-        <div className='todos'>
-          <h2>Todos</h2>
-          <Todolist items={this.state.todos} />
-          <Todoform
-            term={this.state.term}
-            onChange={this._onChange.bind(this)}
-            handleSubmit={this._onSubmit.bind(this)}
-          />
-        </div>
-      </Draggable>
+      <div className='todos'>
+        <h2>Todos</h2>
+        <Todolist items={this.state.todos} />
+        <Todoform
+          term={this.state.term}
+          onChange={this._onChange.bind(this)}
+          handleSubmit={this._onSubmit.bind(this)}
+        />
+      </div>
     );
   }
 }

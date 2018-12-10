@@ -12,6 +12,13 @@ function Noteslist(props) {
             }}
           >
             {item.title}
+            <div
+              onClick={() => {
+                props.handleDelete(item);
+              }}
+            >
+              X
+            </div>
           </li>
         );
       })}

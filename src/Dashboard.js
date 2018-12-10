@@ -21,15 +21,15 @@ class Dashboard extends Component {
     };
   }
 
-  componentDidMount() {
-    fetch(`https://api.unsplash.com/photos/random?client_id=${Keys.USKey}`)
-      .then(r => r.json())
-      .then(object => {
-        this.setState({
-          url: object.urls.regular
-        });
-      });
-  }
+  // componentDidMount() {
+  //   fetch(`https://api.unsplash.com/photos/random?client_id=${Keys.USKey}`)
+  //     .then(r => r.json())
+  //     .then(object => {
+  //       this.setState({
+  //         url: object.urls.regular
+  //       });
+  //     });
+  // }
 
   render() {
     return (
