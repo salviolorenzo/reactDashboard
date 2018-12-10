@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Info from './Info';
 import Keys from '../config';
+import Draggable from 'react-draggable';
 
 function createLocationObject(object) {
   let location = {
@@ -50,13 +51,15 @@ class Weather extends Component {
       );
     } else {
       return (
-        <div className='weather'>
-          <Info
-            temp={this.state.temp}
-            humidity={this.state.humidity}
-            wind={this.state.wind}
-          />
-        </div>
+        <Draggable>
+          <div className='weather'>
+            <Info
+              temp={this.state.temp}
+              humidity={this.state.humidity}
+              wind={this.state.wind}
+            />
+          </div>
+        </Draggable>
       );
     }
   }

@@ -42,6 +42,7 @@ html {
   text-shadow: 0 1px 1px #000000;
   display: flex;
   justify-content: space-evenly;
+  align-items: flex-start;
   flex-wrap: wrap;
 }
 
@@ -56,11 +57,7 @@ h1 {
 .weather {
   color: black;
   text-shadow: none;
-}
-
-.notepad,
-.todos,
-.weather {
+  min-height: 300px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -70,6 +67,12 @@ h1 {
   border-radius: 5px;
   background-color: rgb(252, 228, 150);
   opacity: 0.9;
+}
+
+.notepad:hover,
+.todos:hover,
+.weather:hover {
+  cursor: move;
 }
 
 /* NOTEPAD */
@@ -92,6 +95,10 @@ h2 {
   border-radius: 10px;
   background-color: rgb(254, 246, 204);
   width: 50%;
+}
+
+.note-list li:hover {
+  cursor: pointer;
 }
 
 .editor {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Noteslist from './Noteslist';
 import Editor from './Editor';
+import Draggable from 'react-draggable';
 
 class Notepad extends Component {
   constructor(props) {
@@ -73,18 +74,20 @@ class Notepad extends Component {
 
   render() {
     return (
-      <div className='notepad'>
-        <h2>Notes</h2>
-        <Noteslist
-          items={this.state.notes}
-          onClick={this._onClick.bind(this)}
-          handleNewNote={this._handleNewNote.bind(this)}
-        />
-        <Editor
-          content={this.state.focus}
-          onChange={this._onChange.bind(this)}
-        />
-      </div>
+      <Draggable>
+        <div className='notepad'>
+          <h2>Notes</h2>
+          <Noteslist
+            items={this.state.notes}
+            onClick={this._onClick.bind(this)}
+            handleNewNote={this._handleNewNote.bind(this)}
+          />
+          <Editor
+            content={this.state.focus}
+            onChange={this._onChange.bind(this)}
+          />
+        </div>
+      </Draggable>
     );
   }
 }

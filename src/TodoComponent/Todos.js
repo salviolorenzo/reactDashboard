@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Todolist from './Todolist';
 import Todoform from './Todoform';
+import Draggable from 'react-draggable';
 
 class Todos extends Component {
   constructor(props) {
@@ -46,15 +47,17 @@ class Todos extends Component {
 
   render() {
     return (
-      <div className='todos'>
-        <h2>Todos</h2>
-        <Todolist items={this.state.todos} />
-        <Todoform
-          term={this.state.term}
-          onChange={this._onChange.bind(this)}
-          handleSubmit={this._onSubmit.bind(this)}
-        />
-      </div>
+      <Draggable>
+        <div className='todos'>
+          <h2>Todos</h2>
+          <Todolist items={this.state.todos} />
+          <Todoform
+            term={this.state.term}
+            onChange={this._onChange.bind(this)}
+            handleSubmit={this._onSubmit.bind(this)}
+          />
+        </div>
+      </Draggable>
     );
   }
 }
