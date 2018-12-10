@@ -35,7 +35,6 @@ class Dashboard extends Component {
     return (
       <div className='dashboard' style={createBackSplash(this.state.url)}>
         <h1>Dashboard</h1>
-
         <Todos />
         <Weather />
         <Notepad />
