@@ -279,6 +279,7 @@ h2 {
 
 .news-nav li {
   padding: 10px 0;
+  font-size: 8px;
 }
 
 .news-nav li:hover {
@@ -289,10 +290,26 @@ h2 {
   background-color: #aaaaaa;
 }
 
+@media screen and (min-width: 500px) {
+  .news-nav li {
+    font-size: 12px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .notepad,
   .todos,
   .weather {
     width: 30%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .news {
+    width: 55%;
+  }
+
+  .news-nav li {
+    font-size: 12px;
   }
 }
