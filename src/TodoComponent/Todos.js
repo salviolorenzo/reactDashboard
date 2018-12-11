@@ -33,6 +33,14 @@ class Todos extends Component {
     console.log(this.state.term);
   }
 
+  _handleDelete(item) {
+    let array = this.state.todos;
+    array.splice(array.indexOf(item), 1);
+    this.setState({
+      todos: array
+    });
+  }
+
   _onSubmit(event) {
     event.preventDefault();
     let newTodo = {
@@ -49,7 +57,11 @@ class Todos extends Component {
     return (
       <div className='todos'>
         <h2>Todos</h2>
-        <Todolist items={this.state.todos} />
+        <p>(Click to delete)</p>
+        <Todolist
+          items={this.state.todos}
+          handleDelete={this._handleDelete.bind(this)}
+        />
         <Todoform
           term={this.state.term}
           onChange={this._onChange.bind(this)}

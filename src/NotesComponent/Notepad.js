@@ -87,6 +87,7 @@ class Notepad extends Component {
     return (
       <div className='notepad'>
         <h2>Notes</h2>
+        <p>(Click X to delete)</p>
         <Noteslist
           items={this.state.notes}
           onClick={this._onClick.bind(this)}

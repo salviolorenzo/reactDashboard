@@ -5,7 +5,12 @@ function Todolist(props) {
     <ul className='todo-list'>
       {props.items.map((item, index) => {
         return (
-          <li key={index} onClick={() => {}}>
+          <li
+            key={index}
+            onClick={() => {
+              props.handleDelete(item);
+            }}
+          >
             {item.content}
           </li>
         );
