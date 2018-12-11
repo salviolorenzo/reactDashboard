@@ -3,6 +3,8 @@ import Notepad from './NotesComponent/Notepad';
 import Todos from './TodoComponent/Todos';
 import Weather from './WeatherComponent/Weather';
 import Clock from './Clock';
+import News from './NewsComponent/News';
+import Keys from './config';
 
 function createBackSplash(url) {
   const style = {
@@ -23,15 +25,15 @@ class Dashboard extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   fetch(`https://api.unsplash.com/photos/random?client_id=${Keys.USKey}`)
-  //     .then(r => r.json())
-  //     .then(object => {
-  //       this.setState({
-  //         url: object.urls.regular
-  //       });
-  //     });
-  // }
+  componentDidMount() {
+    fetch(`https://api.unsplash.com/photos/random?client_id=${Keys.USKey}`)
+      .then(r => r.json())
+      .then(object => {
+        this.setState({
+          url: object.urls.regular
+        });
+      });
+  }
 
   render() {
     return (
@@ -42,6 +44,7 @@ class Dashboard extends Component {
           <Todos />
           <Weather />
           <Notepad />
+          <News />
         </div>
       </div>
     );
