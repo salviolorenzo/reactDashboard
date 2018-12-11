@@ -46,6 +46,15 @@ html {
   flex-wrap: wrap;
 }
 
+.tiles {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
 h1 {
   margin: 0 0 5px 0;
   width: 100%;
@@ -172,6 +181,8 @@ h2 {
 
 .weather {
   background-color: #f2f2f2;
+  display: flex;
+  align-items: flex-start;
 }
 
 .weather-info {
@@ -180,10 +191,12 @@ h2 {
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
+  /* min-height: 100%; */
 }
 
-.weather-info h2 {
+.weather h2 {
   max-height: 50px;
+  width: 100%;
 }
 
 .weather-list {
@@ -201,6 +214,18 @@ h2 {
   width: 50%;
   background: #ffffff;
   border-radius: 10px;
+}
+
+/* CLOCK */
+.clock {
+  width: 100%;
+  /* background-color: #adfeec; */
+  align-items: center;
+}
+
+.clock h2,
+.clock h3 {
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {

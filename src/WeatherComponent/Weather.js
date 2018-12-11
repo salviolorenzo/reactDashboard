@@ -12,7 +12,7 @@ function createLocationObject(object) {
   fetch(
     `http://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${
       location.long
-    }&apikey=${Keys.OWKey}`
+    }&type=accurate&apikey=${Keys.OWKey}`
   )
     .then(r => r.json())
     .then(weather => {
@@ -21,7 +21,10 @@ function createLocationObject(object) {
         name: weather.name,
         temp: `${temp} °F`,
         humidity: `${weather.main.humidity}%`,
-        wind: `${weather.wind.speed} MPH`
+        wind: `${weather.wind.speed} MPH`,
+        iconUrl: `http://openweathermap.org/img/w/${
+          weather.weather[0].icon
+        }.png`
       });
     });
   return location;
@@ -34,7 +37,8 @@ class Weather extends Component {
       name: '',
       temp: '',
       humidity: '',
-      wind: ''
+      wind: '',
+      iconUrl: ''
     };
   }
 
@@ -52,6 +56,8 @@ class Weather extends Component {
     } else {
       return (
         <div className='weather'>
+          <h2>Your Weather</h2>
+          <img src={this.state.iconUrl} />
           <Info
             temp={this.state.temp}
             humidity={this.state.humidity}

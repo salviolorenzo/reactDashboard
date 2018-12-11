@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Notepad from './NotesComponent/Notepad';
 import Todos from './TodoComponent/Todos';
 import Weather from './WeatherComponent/Weather';
-import Keys from './config';
+import Clock from './Clock';
 
 function createBackSplash(url) {
   const style = {
@@ -18,7 +18,8 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       weather: '',
-      backgroundUrl: ''
+      backgroundUrl: '',
+      time: ''
     };
   }
 
@@ -36,9 +37,12 @@ class Dashboard extends Component {
     return (
       <div className='dashboard' style={createBackSplash(this.state.url)}>
         <h1>Dashboard</h1>
-        <Todos />
-        <Weather />
-        <Notepad />
+        <Clock />
+        <div className='tiles'>
+          <Todos />
+          <Weather />
+          <Notepad />
+        </div>
       </div>
     );
   }
