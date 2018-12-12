@@ -27,6 +27,12 @@ app.get('/notes', (req, res) => {
   });
 });
 
+app.get('/todos', (req, res) => {
+  Todo.getByUser(1).then(result => {
+    res.send(result);
+  });
+});
+
 app.listen(4000, () => {
   console.log('listening on port 4000');
 });

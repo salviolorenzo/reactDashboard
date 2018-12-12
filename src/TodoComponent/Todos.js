@@ -26,6 +26,16 @@ class Todos extends Component {
     };
   }
 
+  componentDidMount() {
+    fetch(`/todos`)
+      .then(r => r.json())
+      .then(resultArray => {
+        this.setState({
+          todos: resultArray
+        });
+      });
+  }
+
   _onChange(event) {
     this.setState({
       term: event.target.value

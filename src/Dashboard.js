@@ -32,7 +32,7 @@ function createLocationObject(object) {
       let temp = (((weather.main.temp - 273.15) * 9) / 5 + 32).toFixed(2);
       this.setState({
         weather: {
-          desc: weather.weather[0].description,
+          desc: weather.weather[0].main,
           temp: `${temp} °F`,
           humidity: `${weather.main.humidity}%`,
           wind: `${weather.wind.speed} MPH`,
