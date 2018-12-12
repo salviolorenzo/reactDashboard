@@ -17,15 +17,20 @@ class Notepad extends Component {
           id: 2,
           title: 'Note 2',
           content: 'nothing happened today '
-        },
-        {
-          id: 3,
-          title: 'Note 3',
-          content: 'I yeeted the wheat today'
         }
       ],
       focus: ''
     };
+  }
+
+  componentDidMount() {
+    fetch('/notes')
+      .then(r => r.json())
+      .then(resultArray => {
+        this.setState({
+          notes: resultArray
+        });
+      });
   }
 
   _onClick(note) {

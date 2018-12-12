@@ -12,3 +12,5 @@ const db = pgp({
   port: 5432,
   database: 'dash-db'
 });
+
+module.exports = db;

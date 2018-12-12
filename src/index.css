@@ -65,7 +65,8 @@ h1 {
 .notepad,
 .todos,
 .weather,
-.news {
+.news,
+.newComp {
   color: black;
   text-shadow: none;
   min-height: 300px;
@@ -278,16 +279,24 @@ h2 {
 }
 
 .news-nav li {
-  padding: 10px 0;
+  padding: 10px 2px;
   font-size: 8px;
 }
 
 .news-nav li:hover {
   cursor: pointer;
+  transform: scale(1.2);
+  transition: transform 0.25s;
+  background-color: #aaaaaa;
 }
 
 .news-nav li:active {
   background-color: #aaaaaa;
+}
+
+/* New Component */
+.newComp {
+  background-color: aliceblue;
 }
 
 @media screen and (min-width: 500px) {
@@ -306,7 +315,11 @@ h2 {
 
 @media screen and (min-width: 900px) {
   .news {
-    width: 55%;
+    width: 58%;
+  }
+
+  .newComp {
+    width: 35%;
   }
 
   .news-nav li {

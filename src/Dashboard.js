@@ -5,6 +5,7 @@ import Weather from './WeatherComponent/Weather';
 import Clock from './Clock';
 import News from './NewsComponent/News';
 import Keys from './config';
+import NewComponent from './NextComponent/Component';
 
 function createBackSplash(url) {
   const style = {
@@ -33,6 +34,9 @@ class Dashboard extends Component {
           url: object.urls.regular
         });
       });
+    fetch(`/users`)
+      .then(r => r.json())
+      .then(console.log);
   }
 
   render() {
@@ -45,6 +49,7 @@ class Dashboard extends Component {
           <Weather />
           <Notepad />
           <News />
+          <NewComponent />
         </div>
       </div>
     );

@@ -8,7 +8,9 @@ function NewsList(props) {
         return (
           <li key={index}>
             <h4>
-              <a href={item.url}>{item.title}</a>
+              <a href={item.url} target='_blank' rel='noopener noreferrer'>
+                {item.title}
+              </a>
             </h4>
           </li>
         );
