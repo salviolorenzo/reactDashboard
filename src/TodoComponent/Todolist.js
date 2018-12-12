@@ -3,10 +3,10 @@ import React from 'react';
 function Todolist(props) {
   return (
     <ul className='todo-list'>
-      {props.items.map((item, index) => {
+      {props.items.map(item => {
         return (
           <li
-            key={index}
+            key={item.id}
             onClick={() => {
               props.handleDelete(item);
             }}

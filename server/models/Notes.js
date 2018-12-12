@@ -33,12 +33,16 @@ class Note {
     return db.any(`select * from notes where user_id = $1`, [user_id]);
   }
 
-  static updateNote(id, newNote) {
-    return db.result(`update notes set content=$2 where id=$1`, [id, newNote]);
+  static updateNote(id, newTitle, newNote) {
+    return db.result(`update notes set title=$1, content=$2 where id=$3`, [
+      newTitle,
+      newNote,
+      id
+    ]);
   }
 
   static delete(id) {
-    return db.result(`delete * from notes where id=$1`, [id]);
+    return db.result(`delete from notes where id=$1`, [id]);
   }
 }
 

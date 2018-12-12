@@ -34,7 +34,7 @@ class Notepad extends Component {
   }
 
   _onClick(note) {
-    // console.log(note);
+    console.log(note);
     this.setState({
       focus: note
     });
@@ -42,6 +42,21 @@ class Notepad extends Component {
 
   _onChange(note, event) {
     note.content = event.target.value;
+    console.log(event.target.value);
+    let newArray = this.state.notes.map(item => {
+      if (item.id === note.id) {
+        return note;
+      } else {
+        return item;
+      }
+    });
+    this.setState({
+      notes: newArray
+    });
+  }
+
+  _handleTitle(note, event) {
+    note.title = event.target.value;
     console.log(event.target.value);
     let newArray = this.state.notes.map(item => {
       if (item.id === note.id) {
@@ -65,7 +80,7 @@ class Notepad extends Component {
   // }
 
   _handleNewNote(event) {
-    console.log('new');
+    console.log(event.target);
     let newId = this.state.notes.length + 1;
     let newNote = {
       id: newId,
@@ -78,13 +93,49 @@ class Notepad extends Component {
     });
   }
 
+  _handleSubmit(item, e) {
+    e.preventDefault();
+    console.log(e.target.title.value);
+
+    fetch(`/notes/${item.id}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        title: e.target.title.value,
+        content: e.target.editor.value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(r => r.json())
+      .then(result => {
+        let newArray = this.state.notes.map(item => {
+          if (item.id === result.id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        this.setState({
+          notes: newArray,
+          focus: ''
+        });
+      });
+  }
+
   _handleDelete(item) {
     let index = this.state.notes.indexOf(item);
     let array = this.state.notes;
     array.splice(index, 1);
-    this.setState({
-      notes: array,
-      focus: ''
+
+    fetch(`/notes/${item.id}`, {
+      method: 'DELETE'
+    }).then(result => {
+      console.log(result);
+      this.setState({
+        notes: this.state.notes.filter(note => note.id !== item.id),
+        focus: ''
+      });
     });
   }
 
@@ -102,6 +153,8 @@ class Notepad extends Component {
         <Editor
           content={this.state.focus}
           onChange={this._onChange.bind(this)}
+          handleSubmit={this._handleSubmit.bind(this)}
+          handleTitle={this._handleTitle.bind(this)}
         />
       </div>
     );

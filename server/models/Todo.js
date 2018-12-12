@@ -32,7 +32,7 @@ class Todo {
   }
 
   static delete(id) {
-    return db.result(`delete * from todos where id=$1`, [id]);
+    return db.result(`delete from todos where id=$1`, [id]);
   }
 }
 

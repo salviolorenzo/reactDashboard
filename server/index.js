@@ -21,8 +21,29 @@ app.get('/users', (req, res) => {
   });
 });
 
+// NOTES ROUTES
 app.get('/notes', (req, res) => {
   Note.getAll().then(result => {
+    res.send(result);
+  });
+});
+
+app.post('/notes', (req, res) => {
+  Note.add(req.body.title, req.body.content).then(result => {
+    res.send(result);
+  });
+});
+
+app.post('/notes/:id', (req, res) => {
+  Note.updateNote(req.params.id, req.body.title, req.body.content).then(
+    result => {
+      res.send(result);
+    }
+  );
+});
+
+app.delete('/notes/:id', (req, res) => {
+  Note.delete(req.params.id).then(result => {
     res.send(result);
   });
 });

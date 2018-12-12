@@ -3,10 +3,10 @@ import React from 'react';
 function Noteslist(props) {
   return (
     <ul className='note-list'>
-      {props.items.map((item, index) => {
+      {props.items.map(item => {
         return (
           <li
-            key={index}
+            key={item.id}
             onClick={() => {
               props.onClick(item);
             }}
@@ -22,7 +22,14 @@ function Noteslist(props) {
           </li>
         );
       })}
-      <li onClick={props.handleNewNote}>New note</li>
+      <li
+        key={'new'}
+        onClick={item => {
+          props.handleNewNote(item);
+        }}
+      >
+        New note
+      </li>
     </ul>
   );
 }
