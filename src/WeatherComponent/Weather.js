@@ -7,22 +7,12 @@ class Weather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      desc: '',
-      temp: '',
-      humidity: '',
-      wind: '',
-      iconUrl: ''
-    };
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
       desc: props.desc,
       temp: props.temp,
       humidity: props.humidity,
       wind: props.wind,
       iconUrl: props.url
-    });
+    };
   }
 
   render() {

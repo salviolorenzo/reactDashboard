@@ -52,7 +52,7 @@ function createLocationObject(object) {
           let newArray = object.results.slice(0, 10);
           let ranNum = Math.floor(Math.random() * 9);
           this.setState({
-            backgroundUrl: newArray[ranNum].urls.regular
+            backgroundUrl: newArray[ranNum].urls.full
           });
         });
     });
