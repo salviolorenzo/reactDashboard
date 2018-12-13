@@ -39,6 +39,10 @@ function createLocationObject(object) {
           iconUrl: `http://openweathermap.org/img/w/${
             weather.weather[0].icon
           }.png`
+        },
+        location: {
+          long: location.long,
+          lat: location.lat
         }
       });
       fetch(
@@ -64,6 +68,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      location: {},
       weather: {},
       backgroundUrl: '',
       time: ''
@@ -77,6 +82,30 @@ class Dashboard extends Component {
     fetch(`/users`)
       .then(r => r.json())
       .then(console.log);
+  }
+
+  _handleClick() {
+    let location = this.state.location;
+    fetch(
+      `http://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${
+        location.long
+      }&type=accurate&apikey=${Keys.OWKey}`
+    )
+      .then(r => r.json())
+      .then(weather => {
+        let temp = (((weather.main.temp - 273.15) * 9) / 5 + 32).toFixed(2);
+        this.setState({
+          weather: {
+            desc: weather.weather[0].main,
+            temp: `${temp} °F`,
+            humidity: `${weather.main.humidity}%`,
+            wind: `${weather.wind.speed} MPH`,
+            iconUrl: `http://openweathermap.org/img/w/${
+              weather.weather[0].icon
+            }.png`
+          }
+        });
+      });
   }
 
   render() {
@@ -103,6 +132,7 @@ class Dashboard extends Component {
               humidity={this.state.weather.humidity}
               wind={this.state.weather.wind}
               url={this.state.weather.iconUrl}
+              handleClick={this._handleClick.bind(this)}
             />
             <Notepad />
             <News />

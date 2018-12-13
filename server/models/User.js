@@ -59,6 +59,10 @@ class User {
     });
   }
 
+  checkPassword(password) {
+    return bcrypt.compareSync(password, this.password);
+  }
+
   // UPDATE
   updateEmail(newEmail) {
     return db.result(

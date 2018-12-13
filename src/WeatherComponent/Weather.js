@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Info from './Info';
 import Keys from '../config';
-import Draggable from 'react-draggable';
 
 class Weather extends Component {
   constructor(props) {
@@ -32,6 +31,7 @@ class Weather extends Component {
             humidity={this.state.humidity}
             wind={this.state.wind}
           />
+          <button onClick={this.props.handleClick}>Reload</button>
         </div>
       );
     }
