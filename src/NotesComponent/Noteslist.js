@@ -24,8 +24,8 @@ function Noteslist(props) {
       })}
       <li
         key={'new'}
-        onClick={item => {
-          props.handleNewNote(item);
+        onClick={() => {
+          props.handleNewNote();
         }}
       >
         New note

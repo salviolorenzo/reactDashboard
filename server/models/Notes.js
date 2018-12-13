@@ -9,11 +9,12 @@ class Note {
 
   static add(title, content, user_id) {
     return db
-      .any(
+      .one(
         `insert into notes
       (title, content, user_id)
       values
-      ($1,$2,$3)`,
+      ($1,$2,$3)
+      returning id`,
         [title, content, user_id]
       )
       .then(result => {

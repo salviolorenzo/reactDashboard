@@ -34,6 +34,9 @@ class Notepad extends Component {
   }
 
   _onClick(note) {
+    this.setState({
+      focus: []
+    });
     console.log(note);
     this.setState({
       focus: note
@@ -79,18 +82,30 @@ class Notepad extends Component {
   //   return note;
   // }
 
-  _handleNewNote(event) {
-    console.log(event.target);
-    let newId = this.state.notes.length + 1;
-    let newNote = {
-      id: newId,
-      title: `Note ${newId}`,
-      content: ''
-    };
-    this.setState({
-      notes: [...this.state.notes, newNote],
-      focus: newNote
-    });
+  _handleNewNote() {
+    fetch(`/notes/`, {
+      method: 'POST',
+      body: JSON.stringify({
+        title: 'Note',
+        content: ''
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(r => r.json())
+      .then(result => {
+        console.log(result);
+        this.setState({
+          notes: [...this.state.notes, result],
+          focus: result
+        });
+      });
+
+    // this.setState({
+    //   notes: [...this.state.notes, newNote],
+    //   focus: newNote
+    // });
   }
 
   _handleSubmit(item, e) {
@@ -118,7 +133,7 @@ class Notepad extends Component {
         });
         this.setState({
           notes: newArray,
-          focus: ''
+          focus: []
         });
       });
   }
@@ -134,7 +149,7 @@ class Notepad extends Component {
       console.log(result);
       this.setState({
         notes: this.state.notes.filter(note => note.id !== item.id),
-        focus: ''
+        focus: []
       });
     });
   }
