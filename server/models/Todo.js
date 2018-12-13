@@ -7,15 +7,18 @@ class Todo {
   }
 
   static add(content, user_id) {
-    db.any(
-      `insert into todos
+    return db
+      .one(
+        `insert into todos
     (content, user_id)
     values
-    ($1, $2)`,
-      [content, user_id]
-    ).then(result => {
-      return new Todo(result.id, content, user_id);
-    });
+    ($1, $2)
+    returning id`,
+        [content, user_id]
+      )
+      .then(result => {
+        return new Todo(result.id, content, user_id);
+      });
   }
 
   static getByUser(user_id) {

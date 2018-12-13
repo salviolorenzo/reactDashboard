@@ -8,6 +8,7 @@ function Todoform(props) {
         value={props.term}
         onChange={props.onChange}
         placeholder='Start typing a todo'
+        name='input'
       />
       <input type='submit' value='Add' />
     </form>

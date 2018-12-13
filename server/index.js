@@ -48,8 +48,23 @@ app.delete('/notes/:id', (req, res) => {
   });
 });
 
+// TODOS ROUTES
+
 app.get('/todos', (req, res) => {
   Todo.getByUser(1).then(result => {
+    res.send(result);
+  });
+});
+
+app.post('/todos', (req, res) => {
+  Todo.add(req.body.content, req.body.user).then(result => {
+    console.log(result);
+    res.send(result);
+  });
+});
+
+app.delete('/todos/:id', (req, res) => {
+  Todo.delete(req.params.id).then(result => {
     res.send(result);
   });
 });

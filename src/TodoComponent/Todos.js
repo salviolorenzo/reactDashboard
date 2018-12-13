@@ -46,6 +46,14 @@ class Todos extends Component {
   _handleDelete(item) {
     let array = this.state.todos;
     array.splice(array.indexOf(item), 1);
+    fetch(`/todos/${item.id}`, {
+      method: 'DELETE'
+    }).then(result => {
+      this.setState({
+        todos: this.state.todos.filter(todo => todo.id !== item.id)
+      });
+    });
+
     this.setState({
       todos: array
     });
@@ -53,14 +61,25 @@ class Todos extends Component {
 
   _onSubmit(event) {
     event.preventDefault();
-    let newTodo = {
-      id: this.state.todos.length + 2,
-      content: this.state.term
-    };
-    this.setState({
-      todos: [...this.state.todos, newTodo],
-      term: ''
-    });
+    console.log(event.target.input.value);
+    fetch('/todos', {
+      method: 'POST',
+      body: JSON.stringify({
+        content: event.target.input.value,
+        user: 1
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(r => r.json())
+      .then(result => {
+        console.log(result);
+        this.setState({
+          todos: [...this.state.todos, result],
+          term: ''
+        });
+      });
   }
 
   render() {

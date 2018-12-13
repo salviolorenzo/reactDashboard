@@ -42,15 +42,15 @@ function createLocationObject(object) {
         }
       });
       fetch(
-        `https://api.unsplash.com/search/photos?page=1&query=${
+        `https://api.unsplash.com/search/photos?query=${
           this.state.weather.desc
         }&client_id=${Keys.USKey}`
       )
         .then(r => r.json())
         .then(object => {
           console.log(object);
-          let newArray = object.results.slice(0, 10);
-          let ranNum = Math.floor(Math.random() * 9);
+          let newArray = object.results.slice(0, 20);
+          let ranNum = Math.floor(Math.random() * 10);
           this.setState({
             backgroundUrl: newArray[ranNum].urls.full
           });

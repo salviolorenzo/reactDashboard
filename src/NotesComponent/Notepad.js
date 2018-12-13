@@ -7,18 +7,7 @@ class Notepad extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [
-        {
-          id: 1,
-          title: 'Note 1',
-          content: 'Today i went to the store and that was it, it was cool'
-        },
-        {
-          id: 2,
-          title: 'Note 2',
-          content: 'nothing happened today '
-        }
-      ],
+      notes: [],
       focus: ''
     };
   }
