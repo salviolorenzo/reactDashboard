@@ -22,7 +22,8 @@ class Todos extends Component {
         }
       ],
       term: '',
-      focus: ''
+      focus: '',
+      style: {}
     };
   }
 
@@ -82,6 +83,17 @@ class Todos extends Component {
       });
   }
 
+  // _handleCheck(item, event) {
+  //   console.log(item);
+  //   console.log(event.target);
+  //   const newStyle = {
+  //     textDecoration: 'strikethrough'
+  //   };
+  //   this.setState({
+  //     style: newStyle
+  //   });
+  // }
+
   render() {
     return (
       <div className='todos'>
@@ -89,7 +101,9 @@ class Todos extends Component {
         <p>(Click to delete)</p>
         <Todolist
           items={this.state.todos}
+          style={this.state.style}
           handleDelete={this._handleDelete.bind(this)}
+          // handleCheck={this._handleCheck.bind(this)}
         />
         <Todoform
           term={this.state.term}

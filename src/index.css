@@ -100,6 +100,8 @@ h2 {
 .note-list li {
   padding: 5px;
   margin: 2px 0;
+  display: inherit;
+  justify-content: space-between;
   border-radius: 10px;
   background-color: rgb(254, 246, 204);
   min-width: 50%;
@@ -108,8 +110,8 @@ h2 {
 
 .note-list div {
   display: inline;
-  position: relative;
-  left: 20%;
+  position: static;
+  right: 20%;
   /* background-color: #f2f2f2; */
   color: red;
 }
@@ -170,10 +172,16 @@ h2 {
   padding: 5px;
   margin: 2px 0;
   width: 80%;
-
+  display: inherit;
+  justify-content: space-between;
   word-wrap: break-word;
   background-color: rgb(247, 252, 255);
   border-radius: 10px;
+}
+
+.checkbox {
+  outline: 1px solid black;
+  width: 15px;
 }
 
 .todo-list li:hover {

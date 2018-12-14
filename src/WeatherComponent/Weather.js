@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Info from './Info';
-import Keys from '../config';
 
 class Weather extends Component {
   constructor(props) {

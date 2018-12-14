@@ -7,11 +7,15 @@ function Todolist(props) {
         return (
           <li
             key={item.id}
-            onClick={() => {
-              props.handleDelete(item);
+            onClick={event => {
+              props.handleDelete(item, event);
             }}
+            style={props.style}
           >
             {item.content}
+            <div className='checkbox'>
+              <p />
+            </div>
           </li>
         );
       })}
