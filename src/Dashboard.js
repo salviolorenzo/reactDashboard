@@ -7,7 +7,7 @@ import Keys from './config';
 import NewComponent from './NextComponent/Component';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './HeaderComponent/Header';
-import Settings from './Settings';
+import Settings from './SettingsComponent/Settings';
 
 function createBackSplash(url) {
   const style = {
@@ -115,27 +115,40 @@ class Dashboard extends Component {
       );
     } else {
       return (
-        <div
-          className='dashboard'
-          style={createBackSplash(this.state.backgroundUrl)}
-        >
-          <Header />
-          <div className='tiles'>
-            <Todos />
-            <Notepad />
-            <Weather
-              desc={this.state.weather.desc}
-              temp={this.state.weather.temp}
-              humidity={this.state.weather.humidity}
-              wind={this.state.weather.wind}
-              url={this.state.weather.iconUrl}
-              handleClick={this._handleClick.bind(this)}
+        <Router>
+          <div
+            className='dashboard'
+            style={createBackSplash(this.state.backgroundUrl)}
+          >
+            <Header />
+            <Route
+              path='/home'
+              exact
+              render={props => {
+                return (
+                  <div className='tiles'>
+                    <Todos />
+                    <Notepad />
+                    <Weather
+                      desc={this.state.weather.desc}
+                      temp={this.state.weather.temp}
+                      humidity={this.state.weather.humidity}
+                      wind={this.state.weather.wind}
+                      url={this.state.weather.iconUrl}
+                      handleClick={this._handleClick.bind(this)}
+                      {...props}
+                    />
+                    <News />
+                  </div>
+                );
+              }}
             />
-            <News />
+
+            <Route path='/home/settings' component={Settings} />
 
             {/* <NewComponent /> */}
           </div>
-        </div>
+        </Router>
       );
     }
   }

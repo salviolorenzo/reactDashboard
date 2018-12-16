@@ -43,7 +43,9 @@ html {
   flex-wrap: wrap;
 }
 
+/* ================================================ */
 /* HEADER STYLES */
+/* ================================================ */
 header {
   display: flex;
   flex-wrap: wrap;
@@ -60,6 +62,11 @@ header {
 .top-bar input,
 .top-bar button {
   background-color: rgba(0, 0, 0, 0);
+}
+
+.top-bar a {
+  text-decoration: none;
+  color: #000000;
 }
 
 .top-bar h1 {
@@ -83,6 +90,44 @@ h1 {
   width: 100%;
   max-height: 50px;
 }
+/* ================================================ */
+/* CLOCK */
+/* ================================================ */
+.clock {
+  width: 100%;
+  /* background-color: #adfeec; */
+  align-items: center;
+}
+
+.clock h2,
+.clock h3 {
+  width: 100%;
+}
+
+/* ================================================ */
+/* SETTINGS */
+/* ================================================ */
+.settings {
+  min-height: 100%;
+  width: 100%;
+}
+
+.editSettings {
+  display: flex;
+  flex-direction: column;
+  /* height: 100%; */
+  min-height: 300px;
+}
+
+.editSettings form {
+  display: inherit;
+  flex-direction: column;
+  width: 50%;
+}
+
+/* ================================================ */
+/* MAIN TILES */
+/* ================================================ */
 
 .notepad,
 .todos,
@@ -109,7 +154,9 @@ h1 {
   cursor: move;
 } */
 
+/* ================================================ */
 /* NOTEPAD */
+/* ================================================ */
 h2 {
   margin: 5px 0;
 }
@@ -169,8 +216,9 @@ h2 {
   background-color: rgb(254, 246, 204);
 }
 
+/* ================================================ */
 /* TODOS */
-
+/* ================================================ */
 .todos {
   background-color: rgb(182, 231, 254);
 }
@@ -225,8 +273,9 @@ h2 {
   border-radius: 5px;
 }
 
+/* ================================================ */
 /* WEATHER */
-
+/* ================================================ */
 .weather {
   background-color: #f2f2f2;
   display: flex;
@@ -268,19 +317,9 @@ h2 {
   width: 75px;
 }
 
-/* CLOCK */
-.clock {
-  width: 100%;
-  /* background-color: #adfeec; */
-  align-items: center;
-}
-
-.clock h2,
-.clock h3 {
-  width: 100%;
-}
-
+/* ================================================ */
 /* NEWS */
+/* ================================================ */
 .news {
   background-color: #aaaaaa;
   padding: 10px;
@@ -341,10 +380,16 @@ h2 {
   background-color: #aaaaaa;
 }
 
+/* ================================================ */
 /* New Component */
+/* ================================================ */
 .newComp {
   background-color: aliceblue;
 }
+
+/* ================================================ */
+/* MEDIA QUERIES */
+/* ================================================ */
 
 @media screen and (min-width: 500px) {
   .news-nav li {

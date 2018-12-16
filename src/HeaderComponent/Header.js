@@ -15,9 +15,11 @@ class Header extends Component {
       <header>
         <div className='top-bar'>
           <button>
-            <Link to='/settings'>Settings</Link>
+            <Link to='/home/settings'>Settings</Link>
           </button>
-          <h1>Dashboard</h1>
+          <h1>
+            <Link to='/home'>Dashboard</Link>
+          </h1>
           <form action='/logout' method='post'>
             <input type='submit' value='Log out' />
           </form>

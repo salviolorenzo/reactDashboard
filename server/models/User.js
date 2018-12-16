@@ -47,7 +47,7 @@ class User {
       });
   }
 
-  static getById(Id) {
+  static getById(id) {
     return db.one(`select * from users where id =$1`, [id]).then(user => {
       return new User(
         user.id,
@@ -70,6 +70,22 @@ class User {
       set email=$1
       where id =$2`,
       [newEmail, this.id]
+    );
+  }
+  updateName(newName) {
+    return db.result(
+      `update users 
+      set name=$1
+      where id =$2`,
+      [newName, this.id]
+    );
+  }
+  updateUsername(newUsername) {
+    return db.result(
+      `update users 
+      set username=$1
+      where id =$2`,
+      [newUsername, this.id]
     );
   }
 }

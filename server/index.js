@@ -93,8 +93,17 @@ app.post(`/logout`, (req, res) => {
   res.redirect('/');
 });
 
-app.get(`/:user_id/settings`, (req, res) => {
-  res.send();
+app.get(`/home/settings`, (req, res) => {
+  User.getById(req.session.user.id).then(result => res.send(result));
+});
+
+app.post(`/settings`, (req, res) => {
+  User.getById(req.session.user.id).then(user => {
+    user.updateName(req.body.name);
+    user.updateEmail(req.body.email);
+    user.updateUsername(req.body.username);
+    res.redirect('/home/settings');
+  });
 });
 
 // NOTES ROUTES
