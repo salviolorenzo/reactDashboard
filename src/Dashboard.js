@@ -7,6 +7,7 @@ import Keys from './config';
 import NewComponent from './NextComponent/Component';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './HeaderComponent/Header';
+import Settings from './Settings';
 
 function createBackSplash(url) {
   const style = {
@@ -79,10 +80,6 @@ class Dashboard extends Component {
   componentDidMount() {
     console.log(this.state);
     navigator.geolocation.getCurrentPosition(createLocationObject.bind(this));
-
-    fetch(`/users`)
-      .then(r => r.json())
-      .then(console.log);
   }
 
   _handleClick() {
@@ -113,43 +110,32 @@ class Dashboard extends Component {
     if (this.state.backgroundUrl === '') {
       return (
         <div className='dashboard'>
-          <h1>Welcome</h1>
+          <Header />
         </div>
       );
     } else {
       return (
-        <Router>
-          <div
-            className='dashboard'
-            style={createBackSplash(this.state.backgroundUrl)}
-          >
-            <Header />
-            <div className='tiles'>
-              {/* <Todos /> */}
-              <Route path='/home' exact component={Todos} />
-              <Route
-                path='/home'
-                exact
-                render={props => {
-                  return (
-                    <Weather
-                      desc={this.state.weather.desc}
-                      temp={this.state.weather.temp}
-                      humidity={this.state.weather.humidity}
-                      wind={this.state.weather.wind}
-                      url={this.state.weather.iconUrl}
-                      handleClick={this._handleClick.bind(this)}
-                      {...props}
-                    />
-                  );
-                }}
-              />
-              <Route path='/home' exact component={Notepad} />
-              <Route path='/home' exact component={News} />
-              {/* <NewComponent /> */}
-            </div>
+        <div
+          className='dashboard'
+          style={createBackSplash(this.state.backgroundUrl)}
+        >
+          <Header />
+          <div className='tiles'>
+            <Todos />
+            <Notepad />
+            <Weather
+              desc={this.state.weather.desc}
+              temp={this.state.weather.temp}
+              humidity={this.state.weather.humidity}
+              wind={this.state.weather.wind}
+              url={this.state.weather.iconUrl}
+              handleClick={this._handleClick.bind(this)}
+            />
+            <News />
+
+            <NewComponent />
           </div>
-        </Router>
+        </div>
       );
     }
   }

@@ -8,12 +8,13 @@ class Notepad extends Component {
     super(props);
     this.state = {
       notes: [],
-      focus: ''
+      focus: '',
+      user_id: 1
     };
   }
 
   componentDidMount() {
-    fetch('/notes')
+    fetch(`/${this.state.user_id}/notes`)
       .then(r => r.json())
       .then(resultArray => {
         this.setState({
@@ -72,7 +73,7 @@ class Notepad extends Component {
   // }
 
   _handleNewNote() {
-    fetch(`/notes/`, {
+    fetch(`/${this.state.user_id}/notes/`, {
       method: 'POST',
       body: JSON.stringify({
         title: 'Note',
@@ -101,7 +102,7 @@ class Notepad extends Component {
     e.preventDefault();
     console.log(e.target.title.value);
 
-    fetch(`/notes/${item.id}`, {
+    fetch(`/${this.state.user_id}/notes/${item.id}`, {
       method: 'POST',
       body: JSON.stringify({
         title: e.target.title.value,
@@ -132,7 +133,7 @@ class Notepad extends Component {
     let array = this.state.notes;
     array.splice(index, 1);
 
-    fetch(`/notes/${item.id}`, {
+    fetch(`/${this.state.user_id}/notes/${item.id}`, {
       method: 'DELETE'
     }).then(result => {
       console.log(result);

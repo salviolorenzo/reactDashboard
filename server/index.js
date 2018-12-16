@@ -29,6 +29,11 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  let isLoggedIn = req.session.user ? true : false;
+  console.log(isLoggedIn);
+  next();
+});
 // passport.use(
 //   new SpotifyStrategy(
 //     {
@@ -47,43 +52,68 @@ app.use(
 //   )
 // );
 
-app.get('/', (req, res) => {
-  res.send('Home');
-});
+// app.get('/', (req, res) => {
+//   res.send('Home');
+// });
 
-app.get('/home', (req, res) => {
+app.get('/:user_id/home', (req, res) => {
   res.send();
-});
-
-app.get('/users', (req, res) => {
-  User.getAll().then(userArray => {
-    res.send(userArray);
-  });
 });
 
 app.post('/login', (req, res) => {
   User.getByUsername(req.body.username).then(user => {
     let didMatch = user.checkPassword(req.body.password, user.password);
     if (didMatch) {
+      req.session.user = user;
+      console.log(req.session.user);
+
       res.redirect('/home');
+    } else {
+      res.redirect('/');
     }
   });
 });
 
+app.post('/register', (req, res) => {
+  User.addUser(
+    req.body.name,
+    req.body.email,
+    req.body.username,
+    req.body.password
+  )
+    .then(user => {
+      console.log(user);
+      req.session.user = user;
+      console.log(req.session.user);
+    })
+    .then(res.redirect('/home'));
+});
+
+app.post(`/logout`, (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
+});
+
+app.get(`/:user_id/settings`, (req, res) => {
+  res.send();
+});
+
 // NOTES ROUTES
-app.get('/notes', (req, res) => {
-  Note.getAll().then(result => {
+app.get('/:user_id/notes', (req, res) => {
+  Note.getByUser(req.session.user.id).then(result => {
     res.send(result);
   });
 });
 
-app.post('/notes', (req, res) => {
-  Note.add(req.body.title, req.body.content).then(result => {
-    res.send(result);
-  });
+app.post('/:user_id/notes', (req, res) => {
+  Note.add(req.body.title, req.body.content, req.session.user.id).then(
+    result => {
+      res.send(result);
+    }
+  );
 });
 
-app.post('/notes/:id', (req, res) => {
+app.post('/:user_id/notes/:id', (req, res) => {
   Note.updateNote(req.params.id, req.body.title, req.body.content).then(
     result => {
       res.send(result);
@@ -91,7 +121,7 @@ app.post('/notes/:id', (req, res) => {
   );
 });
 
-app.delete('/notes/:id', (req, res) => {
+app.delete('/:user_id/notes/:id', (req, res) => {
   Note.delete(req.params.id).then(result => {
     res.send(result);
   });
@@ -99,20 +129,20 @@ app.delete('/notes/:id', (req, res) => {
 
 // TODOS ROUTES
 
-app.get('/todos', (req, res) => {
-  Todo.getByUser(1).then(result => {
+app.get('/:user_id/todos', (req, res) => {
+  Todo.getByUser(req.session.user.id).then(result => {
     res.send(result);
   });
 });
 
-app.post('/todos', (req, res) => {
-  Todo.add(req.body.content, req.body.user).then(result => {
+app.post('/:user_id/todos', (req, res) => {
+  Todo.add(req.body.content, req.session.user.id).then(result => {
     console.log(result);
     res.send(result);
   });
 });
 
-app.delete('/todos/:id', (req, res) => {
+app.delete('/:user_id/todos/:id', (req, res) => {
   Todo.delete(req.params.id).then(result => {
     res.send(result);
   });

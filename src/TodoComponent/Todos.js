@@ -7,28 +7,16 @@ class Todos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [
-        {
-          id: 1,
-          content: 'Wash the car'
-        },
-        {
-          id: 2,
-          content: 'Eat some food'
-        },
-        {
-          id: 3,
-          content: 'Find the kids'
-        }
-      ],
+      todos: [],
       term: '',
       focus: '',
-      style: {}
+      style: {},
+      user_id: 1
     };
   }
 
   componentDidMount() {
-    fetch(`/todos`)
+    fetch(`/${this.state.user_id}/todos`)
       .then(r => r.json())
       .then(resultArray => {
         this.setState({
@@ -47,7 +35,7 @@ class Todos extends Component {
   _handleDelete(item) {
     let array = this.state.todos;
     array.splice(array.indexOf(item), 1);
-    fetch(`/todos/${item.id}`, {
+    fetch(`/${this.state.user_id}/todos/${item.id}`, {
       method: 'DELETE'
     }).then(result => {
       this.setState({
@@ -63,7 +51,7 @@ class Todos extends Component {
   _onSubmit(event) {
     event.preventDefault();
     console.log(event.target.input.value);
-    fetch('/todos', {
+    fetch(`/${this.state.user_id}/todos`, {
       method: 'POST',
       body: JSON.stringify({
         content: event.target.input.value,
