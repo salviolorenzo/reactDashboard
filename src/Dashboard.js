@@ -133,7 +133,7 @@ class Dashboard extends Component {
             />
             <News />
 
-            <NewComponent />
+            {/* <NewComponent /> */}
           </div>
         </div>
       );

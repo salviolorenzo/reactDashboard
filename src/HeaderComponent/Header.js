@@ -13,14 +13,16 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <button>
-          <Link to='/:user_id/settings'>Settings</Link>
-        </button>
-        <h1>Dashboard</h1>
+        <div className='top-bar'>
+          <button>
+            <Link to='/settings'>Settings</Link>
+          </button>
+          <h1>Dashboard</h1>
+          <form action='/logout' method='post'>
+            <input type='submit' value='Log out' />
+          </form>
+        </div>
         <Clock />
-        <form action='/logout' method='post'>
-          <input type='submit' value='Log out' />
-        </form>
       </header>
     );
   }

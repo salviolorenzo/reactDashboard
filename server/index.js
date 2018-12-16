@@ -56,7 +56,7 @@ app.use((req, res, next) => {
 //   res.send('Home');
 // });
 
-app.get('/:user_id/home', (req, res) => {
+app.get('/home', (req, res) => {
   res.send();
 });
 
@@ -80,13 +80,12 @@ app.post('/register', (req, res) => {
     req.body.email,
     req.body.username,
     req.body.password
-  )
-    .then(user => {
-      console.log(user);
-      req.session.user = user;
-      console.log(req.session.user);
-    })
-    .then(res.redirect('/home'));
+  ).then(user => {
+    console.log(user);
+    req.session.user = user;
+    console.log(req.session.user);
+    res.redirect('/home');
+  });
 });
 
 app.post(`/logout`, (req, res) => {

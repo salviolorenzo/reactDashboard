@@ -16,7 +16,7 @@ class Todos extends Component {
   }
 
   componentDidMount() {
-    fetch(`/${this.state.user_id}/todos`)
+    fetch(`/:user_id/todos`)
       .then(r => r.json())
       .then(resultArray => {
         this.setState({
@@ -35,7 +35,7 @@ class Todos extends Component {
   _handleDelete(item) {
     let array = this.state.todos;
     array.splice(array.indexOf(item), 1);
-    fetch(`/${this.state.user_id}/todos/${item.id}`, {
+    fetch(`/:user_id/todos/${item.id}`, {
       method: 'DELETE'
     }).then(result => {
       this.setState({
@@ -51,7 +51,7 @@ class Todos extends Component {
   _onSubmit(event) {
     event.preventDefault();
     console.log(event.target.input.value);
-    fetch(`/${this.state.user_id}/todos`, {
+    fetch(`/:user_id/todos`, {
       method: 'POST',
       body: JSON.stringify({
         content: event.target.input.value,
