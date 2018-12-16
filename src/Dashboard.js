@@ -111,6 +111,7 @@ class Dashboard extends Component {
       return (
         <div className='dashboard'>
           <Header />
+          <h4>Loading...</h4>
         </div>
       );
     } else {
