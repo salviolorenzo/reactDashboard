@@ -3,12 +3,17 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import UserInfo from './UserInfo';
 import UserPref from './UserPref';
 
+const style = {
+  textDecoration: 'underline'
+};
+
 class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: '',
-      term: ''
+      term: '',
+      style: {}
     };
   }
 

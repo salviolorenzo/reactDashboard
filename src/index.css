@@ -33,6 +33,14 @@ html {
   box-sizing: inherit;
 }
 
+/* ================================================ */
+/* LOGIN/REGISTER STYLES */
+/* ================================================ */
+
+/* ================================================ */
+/* DASHBOARD STYLES */
+/* ================================================ */
+
 .dashboard {
   background-color: #f7f7f7;
   color: white;
@@ -41,6 +49,11 @@ html {
   justify-content: space-evenly;
   align-items: flex-start;
   flex-wrap: wrap;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
 }
 
 /* ================================================ */
@@ -62,11 +75,6 @@ header {
 .top-bar input,
 .top-bar button {
   background-color: rgba(0, 0, 0, 0);
-}
-
-.top-bar a {
-  text-decoration: none;
-  color: #000000;
 }
 
 .top-bar h1 {
@@ -113,6 +121,14 @@ h1 {
   width: 100%;
 }
 
+.settingsNav {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
 .editSettings {
   display: flex;
   flex-direction: column;
@@ -124,8 +140,13 @@ h1 {
 .editSettings form {
   display: inherit;
   flex-direction: column;
-  width: 50%;
+  text-align: start;
+  width: 60%;
+  border-radius: 5px;
   justify-content: space-evenly;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #000000;
+  padding: 10px;
 }
 
 .editSettings input {
