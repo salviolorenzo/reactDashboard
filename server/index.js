@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const User = require('./models/User');
 const Todo = require('./models/Todo');
 const Note = require('./models/Notes');
+const UserComp = require('./models/Components');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 
@@ -58,6 +59,28 @@ app.use((req, res, next) => {
 
 app.get('/home', (req, res) => {
   res.send();
+});
+
+app.get('/preferences', (req, res) => {
+  UserComp.getPref(req.session.user.id).then(array => {
+    res.send(array);
+  });
+});
+
+app.post('/preferences', (req, res) => {
+  req.body.array.forEach(item => {
+    UserComp.getPrefByName(item).then(object => {
+      UserComp.addPref(req.session.user.id, object.id);
+    });
+  });
+  req.body.delArray.forEach(item => {
+    UserComp.getPrefByName(item).then(object => {
+      UserComp.removePref(req.session.user.id, object.id);
+    });
+  });
+  UserComp.getPref(req.session.user.id).then(array => {
+    res.send(array);
+  });
 });
 
 app.post('/login', (req, res) => {

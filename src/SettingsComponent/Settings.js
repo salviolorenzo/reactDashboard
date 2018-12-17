@@ -58,6 +58,46 @@ class Settings extends Component {
     });
   }
 
+  _handleSubmit(event) {
+    event.preventDefault();
+    const compArray = [];
+    const uncheckedArray = [];
+    if (event.target.Todos.checked === true) {
+      compArray.push(event.target.Todos.value);
+    } else {
+      uncheckedArray.push(event.target.Todos.value);
+    }
+    if (event.target.Notepad.checked === true) {
+      compArray.push(event.target.Notepad.value);
+    } else {
+      uncheckedArray.push(event.target.Notepad.value);
+    }
+    if (event.target.Weather.checked === true) {
+      compArray.push(event.target.Weather.value);
+    } else {
+      uncheckedArray.push(event.target.Weather.value);
+    }
+    if (event.target.News.checked === true) {
+      compArray.push(event.target.News.value);
+    } else {
+      uncheckedArray.push(event.target.News.value);
+    }
+    fetch('/preferences', {
+      method: 'POST',
+      body: JSON.stringify({
+        array: compArray,
+        delArray: uncheckedArray
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(r => r.json())
+      .then(array => {
+        console.log(array);
+      });
+  }
+
   render() {
     return (
       <Router>
@@ -89,7 +129,12 @@ class Settings extends Component {
           <Route
             path='/home/settings/userPreferences'
             render={props => {
-              return <UserPref {...props} />;
+              return (
+                <UserPref
+                  handleSubmit={this._handleSubmit.bind(this)}
+                  {...props}
+                />
+              );
             }}
           />
         </div>

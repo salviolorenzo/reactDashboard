@@ -47,13 +47,13 @@ class News extends Component {
   }
 
   _handleListClick() {
-    if (this.state.className === 'animate') {
+    if (this.state.className === 'animate-open') {
       this.setState({
-        className: ''
+        className: 'animate-close'
       });
     } else {
       this.setState({
-        className: 'animate'
+        className: 'animate-open'
       });
     }
   }
@@ -62,7 +62,7 @@ class News extends Component {
     return (
       <div className='news'>
         <img
-          src='../images/dash.jpeg'
+          src={require('../images/hamburger.png')}
           className='menuClick'
           onClick={this._handleListClick.bind(this)}
         />

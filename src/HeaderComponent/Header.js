@@ -20,7 +20,7 @@ class Header extends Component {
             </Link>
           </button>
           <h1>
-            <Link to='/home'>Dashboard</Link>
+            <a href='/home'>Dashboard</a>
           </h1>
           <form action='/logout' method='post'>
             <input type='submit' value='Log out' />

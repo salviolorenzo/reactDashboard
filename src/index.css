@@ -1,9 +1,17 @@
 @keyframes slide-down {
   from {
-    height: 0px;
+    height: 0;
   }
   to {
     height: 150px;
+  }
+}
+@keyframes slide-up {
+  from {
+    height: 150px;
+  }
+  to {
+    height: 0;
   }
 }
 
@@ -28,6 +36,7 @@ body,
 .dashboard {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: 'Fira Mono', monospace;
@@ -49,6 +58,7 @@ html {
   background-image: url('./images/dash.jpeg');
   background-size: cover;
   background-position: 72%;
+  background-attachment: fixed;
   color: black;
   min-height: 100vh;
   display: flex;
@@ -94,12 +104,11 @@ html {
 
 .dashboard {
   background-color: #f7f7f7;
-  color: white;
-  text-shadow: 0 1px 1px #000000;
   /* display: flex; */
   justify-content: space-evenly;
   align-items: flex-start;
   flex-wrap: wrap;
+  color: black;
 }
 
 a {
@@ -112,6 +121,9 @@ a {
 /* ================================================ */
 header {
   display: flex;
+  text-shadow: 0 1px 1px #000000;
+  color: white;
+
   flex-wrap: wrap;
   width: 100%;
 }
@@ -125,7 +137,8 @@ header {
 
 .top-bar input,
 .top-bar button {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
 }
 
 .top-bar input:hover {
@@ -177,16 +190,31 @@ h1 {
 /* SETTINGS */
 /* ================================================ */
 .settings {
-  min-height: 100vh;
-  width: 100%;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
 }
 
 .settingsNav {
   padding: 0;
   list-style-type: none;
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-evenly;
+}
+
+.settingsNav li {
+  padding: 5px 0;
+  background-color: rgba(170, 170, 170, 0.8);
+  width: 90%;
+  border-radius: 10px;
+  margin: 1px auto;
 }
 
 .editSettings {
@@ -204,7 +232,7 @@ h1 {
   width: 60%;
   border-radius: 5px;
   justify-content: space-evenly;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.7);
   color: #000000;
   padding: 10px;
 }
@@ -412,10 +440,11 @@ h2 {
 .news {
   background-color: #aaaaaa;
   padding: 10px;
+  display: flex;
 }
 
 .news h2 {
-  width: 100%;
+  width: 80%;
 }
 
 .news-list {
@@ -480,7 +509,8 @@ h2 {
   width: 70%;
   height: 0px;
   border-radius: 5px;
-  border: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -490,15 +520,27 @@ h2 {
 }
 
 .menuClick {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 5%;
 }
 
-.animate {
-  animation: slide-down 1s;
+.animate-open {
+  animation: slide-down 1s ease-in-out;
   height: 150px;
+}
+.animate-close {
+  animation: slide-up 1s ease-in-out;
+  height: 0;
 }
 
 .mobileNewsNav li {
   width: 50%;
+}
+
+.mobileNewsNav li:hover {
+  cursor: pointer;
 }
 
 /* ================================================ */
@@ -523,6 +565,18 @@ h2 {
   .todos,
   .weather {
     width: 30%;
+  }
+
+  .mobileNewsNav {
+    display: none;
+  }
+
+  .menuClick {
+    display: none;
+  }
+
+  .news-nav {
+    display: flex;
   }
 }
 

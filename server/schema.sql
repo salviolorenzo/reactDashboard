@@ -19,3 +19,14 @@ create table notes(
   user_id integer references users(id)
 );
 
+create table preferences(
+  id serial primary key,
+  name text
+);
+
+create table user_preferences(
+  id serial primary key,
+  user_id integer references users(id),
+  pref_id integer references preferences(id)
+)
+

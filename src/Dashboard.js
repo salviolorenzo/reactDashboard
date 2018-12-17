@@ -13,7 +13,8 @@ function createBackSplash(url) {
   const style = {
     backgroundImage: `url(${url})`,
     backgroundSize: `cover`,
-    backgroundPosition: `center`
+    backgroundPosition: `center`,
+    backgroundAttachment: `fixed`
   };
   return style;
 }
@@ -73,14 +74,40 @@ class Dashboard extends Component {
       location: {},
       weather: {},
       backgroundUrl: '',
-      time: ''
+      time: '',
+      components: []
     };
   }
 
   componentDidMount() {
+    fetch('/preferences')
+      .then(r => r.json())
+      .then(array => {
+        let newArray = array.map(item => {
+          return item.name;
+        });
+        this.setState({
+          components: newArray
+        });
+      });
     console.log(this.state);
     navigator.geolocation.getCurrentPosition(createLocationObject.bind(this));
   }
+
+  // componentDidUpdate() {
+  //   fetch('/preferences')
+  //     .then(r => r.json())
+  //     .then(array => {
+  //       let newArray = array.map(item => {
+  //         return item.name;
+  //       });
+  //       if (newArray !== this.state.components) {
+  //         this.setState({
+  //           components: newArray
+  //         });
+  //       }
+  //     });
+  // }
 
   _handleClick() {
     let location = this.state.location;
@@ -128,18 +155,22 @@ class Dashboard extends Component {
               render={props => {
                 return (
                   <div className='tiles'>
-                    <Todos />
-                    <Notepad />
-                    <Weather
-                      desc={this.state.weather.desc}
-                      temp={this.state.weather.temp}
-                      humidity={this.state.weather.humidity}
-                      wind={this.state.weather.wind}
-                      url={this.state.weather.iconUrl}
-                      handleClick={this._handleClick.bind(this)}
-                      {...props}
-                    />
-                    <News />
+                    {this.state.components.includes('Todos') ? <Todos /> : null}
+                    {this.state.components.includes('Weather') ? (
+                      <Weather
+                        desc={this.state.weather.desc}
+                        temp={this.state.weather.temp}
+                        humidity={this.state.weather.humidity}
+                        wind={this.state.weather.wind}
+                        url={this.state.weather.iconUrl}
+                        handleClick={this._handleClick.bind(this)}
+                        {...props}
+                      />
+                    ) : null}
+                    {this.state.components.includes('Notepad') ? (
+                      <Notepad />
+                    ) : null}
+                    {this.state.components.includes('News') ? <News /> : null}
                   </div>
                 );
               }}
