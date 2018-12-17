@@ -15,7 +15,9 @@ class Header extends Component {
       <header>
         <div className='top-bar'>
           <button>
-            <Link to='/home/settings'>Settings</Link>
+            <Link to='/home/settings' id='settingsbtn'>
+              Settings
+            </Link>
           </button>
           <h1>
             <Link to='/home'>Dashboard</Link>
