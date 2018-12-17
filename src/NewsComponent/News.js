@@ -8,7 +8,8 @@ class News extends Component {
     super(props);
     this.state = {
       stories: [],
-      category: ''
+      category: '',
+      className: ''
     };
   }
 
@@ -45,11 +46,32 @@ class News extends Component {
       });
   }
 
+  _handleListClick() {
+    if (this.state.className === 'animate') {
+      this.setState({
+        className: ''
+      });
+    } else {
+      this.setState({
+        className: 'animate'
+      });
+    }
+  }
+
   render() {
     return (
       <div className='news'>
+        <img
+          src='../images/dash.jpeg'
+          className='menuClick'
+          onClick={this._handleListClick.bind(this)}
+        />
         <h2>Today's News</h2>
-        <NewsNav handleClick={this._handleClick.bind(this)} />
+        <NewsNav
+          handleClick={this._handleClick.bind(this)}
+          // handleListClick={this._handleListClick.bind(this)}
+          className={this.state.className}
+        />
         <NewsList items={this.state.stories} />
       </div>
     );
