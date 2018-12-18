@@ -4,7 +4,7 @@ import Todos from './TodoComponent/Todos';
 import Weather from './WeatherComponent/Weather';
 import News from './NewsComponent/News';
 import Keys from './config';
-import Github from './NextComponent/Component';
+import Github from './GithubComponent/Component';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './HeaderComponent/Header';
 import Settings from './SettingsComponent/Settings';

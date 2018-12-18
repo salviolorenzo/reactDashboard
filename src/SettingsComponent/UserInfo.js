@@ -30,8 +30,8 @@ function UserInfo(props) {
         <input type='submit' value='Save' />
       </form>
 
-      <a href='http://localhost:4000/auth/github' className='twitbtn'>
-        Github
+      <a href='http://localhost:4000/auth/github'>
+        <button className='twitbtn'>Connect to Github</button>
       </a>
     </div>
   );

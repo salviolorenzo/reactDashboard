@@ -229,7 +229,7 @@ h1 {
   display: inherit;
   flex-direction: column;
   text-align: start;
-  width: 60%;
+  width: 80%;
   border-radius: 5px;
   justify-content: space-evenly;
   background-color: rgba(255, 255, 255, 0.7);
@@ -243,7 +243,12 @@ h1 {
 }
 
 .twitbtn {
-  background-color: rgb(80, 191, 242);
+  background-color: #333;
+  color: white;
+  margin: 5px;
+  padding: 5px;
+  min-width: 100px;
+  border-radius: 10px;
 }
 
 /* ================================================ */
@@ -254,7 +259,7 @@ h1 {
 .todos,
 .weather,
 .news,
-.newComp {
+.gitHub {
   color: black;
   text-shadow: none;
   min-height: 300px;
@@ -554,8 +559,62 @@ h2 {
 /* ================================================ */
 /* New Component */
 /* ================================================ */
-.newComp {
-  background-color: aliceblue;
+.gitHub {
+  background-color: #f1f1f1;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  max-height: 400px;
+  flex-direction: column;
+  padding: 0;
+}
+
+.gitHub a {
+  color: black;
+}
+
+.gitHub h3 {
+  width: 100%;
+  margin: 0 0 10px 0;
+  padding: 10px 0;
+  background-color: #333;
+  border-radius: 5px;
+  color: white;
+}
+
+.gitHub h4 {
+  width: 100%;
+  margin: 10px;
+}
+
+.stat-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  width: 80%;
+  margin: 30px;
+  justify-content: space-evenly;
+}
+
+.stat-list li {
+  font-size: 24px;
+  display: inherit;
+  flex-direction: column;
+}
+
+.stat-list span {
+  font-size: 12px;
+}
+
+.chart {
+  max-width: 90%;
+  background-color: #333;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.gitlogo {
+  width: 40px;
 }
 
 /* ================================================ */
@@ -590,11 +649,15 @@ h2 {
 
 @media screen and (min-width: 900px) {
   .news {
-    width: 58%;
+    width: 50%;
   }
 
-  .newComp {
-    width: 35%;
+  .gitHub {
+    width: 40%;
+  }
+
+  .chart {
+    margin: 30px;
   }
 
   .news-nav li {
