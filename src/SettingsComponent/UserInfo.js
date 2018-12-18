@@ -29,7 +29,10 @@ function UserInfo(props) {
         />
         <input type='submit' value='Save' />
       </form>
-      <button>hey</button>
+
+      <a href='http://localhost:4000/login/twitter' className='twitbtn'>
+        Twitter
+      </a>
     </div>
   );
 }

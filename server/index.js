@@ -78,6 +78,8 @@ passport.use(
         .then(result => {
           console.log(result);
           let user = result;
+          session.twitterToken = token;
+          console.log(profile);
           return cb(null, user);
         })
         .catch(err => {
@@ -111,7 +113,7 @@ app.get(
   '/auth/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('http://localhost:3000/home');
+    res.redirect('http://localhost:3000/home'); // make sure to change this before build
   }
 );
 
