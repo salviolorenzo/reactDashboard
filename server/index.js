@@ -35,6 +35,16 @@ app.use((req, res, next) => {
   console.log(isLoggedIn);
   next();
 });
+
+function protectRoute(req, res, next) {
+  let isLoggedIn = req.session.user ? true : false;
+  if (isLoggedIn) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
+
 // passport.use(
 //   new SpotifyStrategy(
 //     {
@@ -53,11 +63,11 @@ app.use((req, res, next) => {
 //   )
 // );
 
-// app.get('/', (req, res) => {
-//   res.send('Home');
-// });
+app.get('/', (req, res) => {
+  res.send('Home');
+});
 
-app.get('/home', (req, res) => {
+app.get('/home', protectRoute, (req, res) => {
   res.send();
 });
 

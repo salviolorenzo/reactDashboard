@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 function Register(props) {
   return (
     <form action='/register' method='POST' className='homeForm'>
+      <h3>Sign up:</h3>
       <label>Name: </label>
       <input type='text' name='name' />
       <label>Email: </label>
