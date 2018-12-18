@@ -245,10 +245,14 @@ h1 {
 .twitbtn {
   background-color: #333;
   color: white;
-  margin: 5px;
+  margin: 10px;
   padding: 5px;
   min-width: 100px;
   border-radius: 10px;
+}
+
+.twitbtn:hover {
+  cursor: pointer;
 }
 
 /* ================================================ */

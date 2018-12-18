@@ -82,6 +82,11 @@ class Settings extends Component {
     } else {
       uncheckedArray.push(event.target.News.value);
     }
+    if (event.target.GitHub.checked === true) {
+      compArray.push(event.target.GitHub.value);
+    } else {
+      uncheckedArray.push(event.target.GitHub.value);
+    }
     fetch('/preferences', {
       method: 'POST',
       body: JSON.stringify({

@@ -25,7 +25,8 @@ insert into preferences
     ('Todos'),
     ('Notepad'),
     ('Weather'),
-    ('News');
+    ('News'),
+    ('GitHub');
 
 insert into user_preferences
   (user_id, pref_id)

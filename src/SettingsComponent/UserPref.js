@@ -21,6 +21,10 @@ function UserPref(props) {
           <input type='checkbox' name='News' value='News' />
           News
         </label>
+        <label>
+          <input type='checkbox' name='GitHub' value='GitHub' />
+          GitHub
+        </label>
         <input type='submit' value='Save' />
       </form>
     </div>

@@ -171,7 +171,9 @@ class Dashboard extends Component {
                       <Notepad />
                     ) : null}
                     {this.state.components.includes('News') ? <News /> : null}
-                    <Github />
+                    {this.state.components.includes('GitHub') ? (
+                      <Github />
+                    ) : null}
                   </div>
                 );
               }}
