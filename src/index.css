@@ -526,6 +526,10 @@ h2 {
   left: 5%;
 }
 
+.menuClick:hover {
+  cursor: pointer;
+}
+
 .animate-open {
   animation: slide-down 1s ease-in-out;
   height: 150px;

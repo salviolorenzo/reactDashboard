@@ -1,6 +1,8 @@
 const db = require('./models/db');
 const keys = require('./config');
 const SpotifyStrategy = require('passport-spotify').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
+const passport = require('passport');
 
 const express = require('express');
 const app = express();
@@ -10,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const User = require('./models/User');
+console.log(User.twitterFind);
 const Todo = require('./models/Todo');
 const Note = require('./models/Notes');
 const UserComp = require('./models/Components');
@@ -63,8 +66,57 @@ function protectRoute(req, res, next) {
 //   )
 // );
 
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: keys.twitter.client_id,
+      consumerSecret: keys.twitter.client_secret,
+      callbackURL: 'http://localhost:4000/auth/twitter/callback'
+    },
+    function(token, tokenSecret, profile, cb) {
+      User.twitterFind(profile.id)
+        .then(result => {
+          console.log(result);
+          let user = result;
+          return cb(null, user);
+        })
+        .catch(err => {
+          console.log('ABOUT TO PRINT ERROR ++++++++==========');
+          console.log(err, profile);
+          User.updateTwitterId(profile.id, req.session.user.id).then(
+            User.twitterFind(profile.id).then(result => {
+              let user = result;
+              return cb(null, user);
+            })
+          );
+        });
+    }
+  )
+);
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/login/twitter', passport.authenticate('twitter'));
+
+app.get(
+  '/auth/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('http://localhost:3000/home');
+  }
+);
+
 app.get('/', (req, res) => {
-  res.send('Home');
+  res.send('ROOT ');
 });
 
 app.get('/home', protectRoute, (req, res) => {
