@@ -1,5 +1,5 @@
 insert into users
-  (name, email, username, password, twitter_id)
+  (name, email, username, password, github_id)
   values
     ('Lorenzo', 'lorenzo@mail.com', 'zo', 'lorenzo', ''),
     ('enzo','zo@mail.com', 'lore', '$2b$10$tIslEYe60Ly.TXu6IhhclO/XL.vIG8ZGg7jvqOJUxF.lC8bmntGBi', '');

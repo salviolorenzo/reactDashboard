@@ -2,7 +2,9 @@ const db = require('./models/db');
 const keys = require('./config');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
+const GithubStrategy = require('passport-github').Strategy;
 const passport = require('passport');
+const fetch = require('node-fetch');
 
 const express = require('express');
 const app = express();
@@ -12,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const User = require('./models/User');
-console.log(User.twitterFind);
+
 const Todo = require('./models/Todo');
 const Note = require('./models/Notes');
 const UserComp = require('./models/Components');
@@ -48,6 +50,8 @@ function protectRoute(req, res, next) {
   }
 }
 
+app.use(require('cookie-parser')());
+
 // passport.use(
 //   new SpotifyStrategy(
 //     {
@@ -66,27 +70,57 @@ function protectRoute(req, res, next) {
 //   )
 // );
 
+// passport.use(
+//   new TwitterStrategy(
+//     {
+//       consumerKey: keys.twitter.client_id,
+//       consumerSecret: keys.twitter.client_secret,
+//       callbackURL: 'http://localhost:4000/auth/twitter/callback'
+//     },
+//     function(token, tokenSecret, profile, cb) {
+//       User.twitterFind(profile.id)
+//         .then(result => {
+//           console.log(result);
+//           let user = result;
+//           session.twitterToken = token;
+
+//           return cb(null, user);
+//         })
+//         .catch(err => {
+//           console.log('ABOUT TO PRINT ERROR ++++++++==========');
+//           console.log(err, profile);
+//           User.updateTwitterId(profile.id, req.session.user.id).then(
+//             User.twitterFind(profile.id).then(result => {
+//               let user = result;
+//               return cb(null, user);
+//             })
+//           );
+//         });
+//     }
+//   )
+// );
+
 passport.use(
-  new TwitterStrategy(
+  new GithubStrategy(
     {
-      consumerKey: keys.twitter.client_id,
-      consumerSecret: keys.twitter.client_secret,
-      callbackURL: 'http://localhost:4000/auth/twitter/callback'
+      clientID: keys.github.client_id,
+      clientSecret: keys.github.client_secret,
+      callbackURL: 'http://localhost:4000/auth/github/callback'
     },
-    function(token, tokenSecret, profile, cb) {
-      User.twitterFind(profile.id)
+    function(accessToken, refreshToken, profile, cb) {
+      User.githubFind(profile.id)
         .then(result => {
-          console.log(result);
           let user = result;
-          session.twitterToken = token;
           console.log(profile);
+          console.log(accessToken);
+          session.token = accessToken;
+
           return cb(null, user);
         })
         .catch(err => {
-          console.log('ABOUT TO PRINT ERROR ++++++++==========');
           console.log(err, profile);
-          User.updateTwitterId(profile.id, req.session.user.id).then(
-            User.twitterFind(profile.id).then(result => {
+          User.updateGithubId(profile.id, 2).then(
+            User.githubFind(profile.id).then(result => {
               let user = result;
               return cb(null, user);
             })
@@ -107,18 +141,38 @@ passport.deserializeUser(function(obj, cb) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/login/twitter', passport.authenticate('twitter'));
+// app.get('/login/twitter', passport.authenticate('twitter'));
+
+// app.get(
+//   '/auth/twitter/callback',
+//   passport.authenticate('twitter', { failureRedirect: '/' }),
+//   function(req, res) {
+//     res.redirect('http://localhost:3000/home'); // make sure to change this before build
+//   }
+// );
+
+app.get('/auth/github', passport.authenticate('github'));
 
 app.get(
-  '/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: '/' }),
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('http://localhost:3000/home'); // make sure to change this before build
+    req.session.token = session.token;
+    console.log(` this is whta you're looking for ========${session.token}`);
+    res.redirect('http://localhost:3000/home');
   }
 );
 
 app.get('/', (req, res) => {
   res.send('ROOT ');
+});
+
+app.get('/github/data', (req, res) => {
+  fetch(`https://api.github.com/user?access_token=${req.session.token}`)
+    .then(r => r.json())
+    .then(result => {
+      res.send(result);
+    });
 });
 
 app.get('/home', protectRoute, (req, res) => {

@@ -2,13 +2,13 @@ const db = require('./db');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 class User {
-  constructor(id, name, email, username, password, twitter_id) {
+  constructor(id, name, email, username, password, github_id) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.username = username;
     this.password = password;
-    this.twitter_id = twitter_id;
+    this.github_id = github_id;
   }
 
   // CREATE
@@ -90,9 +90,9 @@ class User {
     );
   }
 
-  static twitterFind(twitter_id) {
+  static githubFind(github_id) {
     return db
-      .one(`select * from users where twitter_id =$1`, [twitter_id])
+      .one(`select * from users where github_id =$1`, [github_id])
       .then(user => {
         return new User(
           user.id,
@@ -100,17 +100,17 @@ class User {
           user.email,
           user.username,
           user.password,
-          user.twitter_id
+          user.github_id
         );
       });
   }
 
-  static updateTwitterId(twitter_id, id) {
+  static updateGithubId(github_id, id) {
     return db.result(
       `update users
-      set twitter_id=$1
+      set github_id=$1
       where id=$2`,
-      [twitter_id, id]
+      [github_id, id]
     );
   }
 }

@@ -4,7 +4,7 @@ create table users(
   email varchar(50) not null unique,
   username varchar(50) not null unique,
   password varchar(100) not null,
-  twitter_id varchar(100) 
+  github_id varchar(100) 
 );
 
 create table todos(
