@@ -36,21 +36,30 @@ class Github extends Component {
 
   render() {
     return (
-      <div className='gitHub'>
-        <h3>GitHub</h3>
-        <Stats items={this.state} />
-        <img
-          className='chart'
-          src={`http://ghchart.rshah.org/${this.state.username}`}
-          alt={`${this.state.username}'s Github chart`}
-        />
-        <a href={this.state.url}>
-          <img
-            className='gitlogo'
-            src={require(`../images/GitHub-Mark-64px.png`)}
-          />
-        </a>
-      </div>
+      <Draggable draggableId='draggable-5' index={4}>
+        {(provided, snapshot) => (
+          <div
+            className='gitHub'
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <h3>GitHub</h3>
+            <Stats items={this.state} />
+            <img
+              className='chart'
+              src={`http://ghchart.rshah.org/${this.state.username}`}
+              alt={`${this.state.username}'s Github chart`}
+            />
+            <a href={this.state.url}>
+              <img
+                className='gitlogo'
+                src={require(`../images/GitHub-Mark-64px.png`)}
+              />
+            </a>
+          </div>
+        )}
+      </Draggable>
     );
   }
 }

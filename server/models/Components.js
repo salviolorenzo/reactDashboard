@@ -23,10 +23,24 @@ class UserComponents {
 
   static getPref(user_id) {
     return db.any(
-      `select * from preferences where id in
-        (select pref_id from user_preferences where user_id=$1)
+      `select p.name from
+      user_preferences u
+      inner join preferences p 
+      on u.pref_id = p.id
+      where u.user_id=$1
+      order by u.index asc
     `,
       [user_id]
+    );
+  }
+  static updateOrder(newIndex, user_id, pref_id) {
+    return db.result(
+      `update user_preferences 
+      set index=$1 
+      where user_id=$2
+      AND
+      pref_id=$3`,
+      [newIndex, user_id, pref_id]
     );
   }
 

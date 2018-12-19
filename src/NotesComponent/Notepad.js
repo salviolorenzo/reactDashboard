@@ -146,22 +146,31 @@ class Notepad extends Component {
 
   render() {
     return (
-      <div className='notepad'>
-        <h2>Notes</h2>
-        <p>(Click X to delete)</p>
-        <Noteslist
-          items={this.state.notes}
-          onClick={this._onClick.bind(this)}
-          handleNewNote={this._handleNewNote.bind(this)}
-          handleDelete={this._handleDelete.bind(this)}
-        />
-        <Editor
-          content={this.state.focus}
-          onChange={this._onChange.bind(this)}
-          handleSubmit={this._handleSubmit.bind(this)}
-          handleTitle={this._handleTitle.bind(this)}
-        />
-      </div>
+      <Draggable draggableId='draggable-3' index={2}>
+        {(provided, snapshot) => (
+          <div
+            className='notepad'
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <h2>Notes</h2>
+            <p>(Click X to delete)</p>
+            <Noteslist
+              items={this.state.notes}
+              onClick={this._onClick.bind(this)}
+              handleNewNote={this._handleNewNote.bind(this)}
+              handleDelete={this._handleDelete.bind(this)}
+            />
+            <Editor
+              content={this.state.focus}
+              onChange={this._onChange.bind(this)}
+              handleSubmit={this._handleSubmit.bind(this)}
+              handleTitle={this._handleTitle.bind(this)}
+            />
+          </div>
+        )}
+      </Draggable>
     );
   }
 }

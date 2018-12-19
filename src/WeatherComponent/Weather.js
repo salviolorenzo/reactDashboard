@@ -23,16 +23,25 @@ class Weather extends Component {
       );
     } else {
       return (
-        <div className='weather'>
-          <h2>Your Weather</h2>
-          <img src={this.state.iconUrl} />
-          <Info
-            temp={this.state.temp}
-            humidity={this.state.humidity}
-            wind={this.state.wind}
-          />
-          <button onClick={this.props.handleClick}>Reload</button>
-        </div>
+        <Draggable draggableId='draggable-2' index={1}>
+          {(provided, snapshot) => (
+            <div
+              className='weather'
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+            >
+              <h2>Your Weather</h2>
+              <img src={this.state.iconUrl} />
+              <Info
+                temp={this.state.temp}
+                humidity={this.state.humidity}
+                wind={this.state.wind}
+              />
+              <button onClick={this.props.handleClick}>Reload</button>
+            </div>
+          )}
+        </Draggable>
       );
     }
   }

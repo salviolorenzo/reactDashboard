@@ -29,11 +29,11 @@ insert into preferences
     ('GitHub');
 
 insert into user_preferences
-  (user_id, pref_id)
+  (index, user_id, pref_id)
   values  
-    (1, 1),
-    (1, 2),
-    (1,4),
-    (2, 3),
-    (2, 2),
-    (2,1);
+    (1, 1, 1),
+    (2, 1, 2),
+    (3, 1,4),
+    (1, 2, 3),
+    (2, 2, 2),
+    (3, 2, 1);

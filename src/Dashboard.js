@@ -77,7 +77,15 @@ class Dashboard extends Component {
       backgroundUrl: '',
       time: '',
       components: [],
-      linkedToGithub: false
+      linkedToGithub: false,
+      draggables: [
+        'draggable-1',
+        'draggable-2',
+        'draggable-3',
+        'draggable-4',
+        'draggable-5'
+      ],
+      compList: []
     };
   }
 
@@ -86,6 +94,7 @@ class Dashboard extends Component {
       .then(r => r.json())
       .then(array => {
         let newArray = array.map(item => {
+          console.log(item);
           return item.name;
         });
         this.setState({
@@ -99,7 +108,28 @@ class Dashboard extends Component {
         .then(r => r.json())
         .then(result => {
           this.setState({
-            linkedToGithub: result
+            linkedToGithub: result,
+            compList: {
+              Todos: this.state.components.includes('Todos') ? <Todos /> : null,
+              Weather: this.state.components.includes('Weather') ? (
+                <Weather
+                  desc={this.state.weather.desc}
+                  temp={this.state.weather.temp}
+                  humidity={this.state.weather.humidity}
+                  wind={this.state.weather.wind}
+                  url={this.state.weather.iconUrl}
+                  handleClick={this._handleClick.bind(this)}
+                  // {...props}
+                />
+              ) : null,
+              Notepad: this.state.components.includes('Notepad') ? (
+                <Notepad />
+              ) : null,
+              News: this.state.components.includes('News') ? <News /> : null,
+              Github: this.state.components.includes('GitHub') ? (
+                <Github />
+              ) : null
+            }
           });
         });
     }
@@ -156,8 +186,21 @@ class Dashboard extends Component {
     return;
   }
 
-  onDragEnd() {
-    return;
+  onDragEnd(result) {
+    console.log(result);
+    const { destination, source, draggableId } = result;
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    // array.splice(source.index, 1);
+    // array.splice(destination.index, 0, draggableId);
   }
 
   render() {
@@ -176,22 +219,24 @@ class Dashboard extends Component {
           onDragUpdate={this.onDragUpdate}
           onDragEnd={this.onDragEnd}
         >
-          <Droppable droppableId='droppable-1'>
-            {(provided, snapshot) => (
-              <Router>
-                <div
-                  className='dashboard'
-                  style={createBackSplash(this.state.backgroundUrl)}
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  <Header />
-                  <Route
-                    path='/home'
-                    exact
-                    render={props => {
-                      return (
-                        <div className='tiles'>
+          <Router>
+            <div
+              className='dashboard'
+              style={createBackSplash(this.state.backgroundUrl)}
+            >
+              <Header />
+              <Route
+                path='/home'
+                exact
+                render={props => {
+                  return (
+                    <Droppable droppableId='droppable-1'>
+                      {(provided, snapshot) => (
+                        <div
+                          className='tiles'
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                        >
                           {this.state.components.includes('Todos') ? (
                             <Todos />
                           ) : null}
@@ -215,30 +260,30 @@ class Dashboard extends Component {
                           {this.state.components.includes('GitHub') ? (
                             <Github />
                           ) : null}
+                          {provided.placeholder}
                         </div>
-                      );
-                    }}
-                  />
+                      )}
+                    </Droppable>
+                  );
+                }}
+              />
 
-                  <Route
-                    path='/home/settings'
-                    render={props => {
-                      return (
-                        <Settings
-                          linkedToGithub={this.state.linkedToGithub}
-                          checkedBoxes={this.state.components}
-                          {...props}
-                        />
-                      );
-                    }}
-                  />
+              <Route
+                path='/home/settings'
+                render={props => {
+                  return (
+                    <Settings
+                      linkedToGithub={this.state.linkedToGithub}
+                      checkedBoxes={this.state.components}
+                      {...props}
+                    />
+                  );
+                }}
+              />
 
-                  {/* <Github /> */}
-                  {provided.placeholder}
-                </div>
-              </Router>
-            )}
-          </Droppable>
+              {/* <Github /> */}
+            </div>
+          </Router>
         </DragDropContext>
       );
     }

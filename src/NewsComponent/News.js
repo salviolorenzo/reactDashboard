@@ -61,20 +61,29 @@ class News extends Component {
 
   render() {
     return (
-      <div className='news'>
-        <img
-          src={require('../images/hamburger.png')}
-          className='menuClick'
-          onClick={this._handleListClick.bind(this)}
-        />
-        <h2>Today's News</h2>
-        <NewsNav
-          handleClick={this._handleClick.bind(this)}
-          // handleListClick={this._handleListClick.bind(this)}
-          className={this.state.className}
-        />
-        <NewsList items={this.state.stories} />
-      </div>
+      <Draggable draggableId='draggable-4' index={3}>
+        {(provided, snapshot) => (
+          <div
+            className='news'
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <img
+              src={require('../images/hamburger.png')}
+              className='menuClick'
+              onClick={this._handleListClick.bind(this)}
+            />
+            <h2>Today's News</h2>
+            <NewsNav
+              handleClick={this._handleClick.bind(this)}
+              // handleListClick={this._handleListClick.bind(this)}
+              className={this.state.className}
+            />
+            <NewsList items={this.state.stories} />
+          </div>
+        )}
+      </Draggable>
     );
   }
 }

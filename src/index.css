@@ -637,18 +637,6 @@ h2 {
   .weather {
     width: 30%;
   }
-
-  .mobileNewsNav {
-    display: none;
-  }
-
-  .menuClick {
-    display: none;
-  }
-
-  .news-nav {
-    display: flex;
-  }
 }
 
 @media screen and (min-width: 900px) {
@@ -666,5 +654,19 @@ h2 {
 
   .news-nav li {
     font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .mobileNewsNav {
+    display: none;
+  }
+
+  .menuClick {
+    display: none;
+  }
+
+  .news-nav {
+    display: flex;
   }
 }

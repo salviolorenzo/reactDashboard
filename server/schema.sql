@@ -27,6 +27,7 @@ create table preferences(
 
 create table user_preferences(
   id serial primary key,
+  index integer,
   user_id integer references users(id),
   pref_id integer references preferences(id)
 )
