@@ -61,7 +61,7 @@ class News extends Component {
 
   render() {
     return (
-      <Draggable draggableId='draggable-4' index={3}>
+      <Draggable draggableId='News' index={3}>
         {(provided, snapshot) => (
           <div
             className='news'

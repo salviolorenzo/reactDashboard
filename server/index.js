@@ -119,7 +119,7 @@ passport.use(
         })
         .catch(err => {
           console.log(err, profile);
-          User.updateGithubId(profile.id, 2).then(
+          User.updateGithubId(profile.id, req.session.user.id).then(
             User.githubFind(profile.id).then(result => {
               let user = result;
               return cb(null, user);
@@ -190,19 +190,19 @@ app.get('/preferences', (req, res) => {
 });
 
 app.post('/preferences', (req, res) => {
-  req.body.array.forEach(item => {
+  UserComp.removePref(req.session.user.id).then(console.log);
+  req.body.array.forEach((item, index) => {
     UserComp.getPrefByName(item).then(object => {
-      UserComp.addPref(req.session.user.id, object.id);
+      UserComp.addPref(req.session.user.id, object.id, index);
     });
   });
-  req.body.delArray.forEach(item => {
-    UserComp.getPrefByName(item).then(object => {
-      UserComp.removePref(req.session.user.id, object.id);
-    });
-  });
+  // req.body.delArray.forEach(item => {
+  //   UserComp.getPrefByName(item).then(object => {
+  //     UserComp.removePref(req.session.user.id, object.id);
+  //   });
+  // });
   UserComp.getPref(req.session.user.id).then(array => {
     res.send(array);
-    res.redirect('/home');
   });
 });
 

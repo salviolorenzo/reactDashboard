@@ -146,7 +146,7 @@ class Notepad extends Component {
 
   render() {
     return (
-      <Draggable draggableId='draggable-3' index={2}>
+      <Draggable draggableId='Notepad' index={1}>
         {(provided, snapshot) => (
           <div
             className='notepad'

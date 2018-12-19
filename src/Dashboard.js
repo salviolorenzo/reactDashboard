@@ -95,7 +95,7 @@ class Dashboard extends Component {
       .then(array => {
         let newArray = array.map(item => {
           console.log(item);
-          return item.name;
+          return { name: item.name, index: item.index };
         });
         this.setState({
           components: newArray
@@ -108,24 +108,13 @@ class Dashboard extends Component {
         .then(r => r.json())
         .then(result => {
           this.setState({
-            linkedToGithub: result
-            // compList: [
-            //   this.state.components.includes('Todos') ? <Todos /> : null,
-            //   this.state.components.includes('Weather') ? (
-            //     <Weather
-            //       desc={this.state.weather.desc}
-            //       temp={this.state.weather.temp}
-            //       humidity={this.state.weather.humidity}
-            //       wind={this.state.weather.wind}
-            //       url={this.state.weather.iconUrl}
-            //       handleClick={this._handleClick.bind(this)}
-            //       // {...props}
-            //     />
-            //   ) : null,
-            //   this.state.components.includes('Notepad') ? <Notepad /> : null,
-            //   this.state.components.includes('News') ? <News /> : null,
-            //   this.state.components.includes('GitHub') ? <Github /> : null
-            // ]
+            linkedToGithub: result,
+            compList: {
+              Todos: <Todos />,
+              Notepad: <Notepad />,
+              News: <News />,
+              GitHub: <Github />
+            }
           });
         });
     }
@@ -194,9 +183,13 @@ class Dashboard extends Component {
     ) {
       return;
     }
-
-    // array.splice(source.index, 1);
-    // array.splice(destination.index, 0, draggableId);
+    const array = Dashboard.state.components;
+    array.splice(source.index, 1);
+    array.splice(destination.index, 0, draggableId);
+    this.setState({
+      components: array
+    });
+    return;
   }
 
   render() {
@@ -233,7 +226,24 @@ class Dashboard extends Component {
                           ref={provided.innerRef}
                           {...provided.droppableProps}
                         >
-                          {this.state.components.includes('Todos') ? (
+                          {this.state.components.map(item => {
+                            if (item.name === 'Weather') {
+                              return (
+                                <Weather
+                                  desc={this.state.weather.desc}
+                                  temp={this.state.weather.temp}
+                                  humidity={this.state.weather.humidity}
+                                  wind={this.state.weather.wind}
+                                  url={this.state.weather.iconUrl}
+                                  handleClick={this._handleClick.bind(this)}
+                                  {...props}
+                                />
+                              );
+                            } else {
+                              return this.state.compList[item.name];
+                            }
+                          })}
+                          {/* {this.state.components.includes('Todos') ? (
                             <Todos />
                           ) : null}
                           {this.state.components.includes('Weather') ? (
@@ -255,7 +265,7 @@ class Dashboard extends Component {
                           ) : null}
                           {this.state.components.includes('GitHub') ? (
                             <Github />
-                          ) : null}
+                          ) : null} */}
                           {provided.placeholder}
                         </div>
                       )}

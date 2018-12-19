@@ -23,7 +23,7 @@ class Weather extends Component {
       );
     } else {
       return (
-        <Draggable draggableId='draggable-2' index={1}>
+        <Draggable draggableId='Weather' index={2}>
           {(provided, snapshot) => (
             <div
               className='weather'
