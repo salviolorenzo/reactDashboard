@@ -108,28 +108,24 @@ class Dashboard extends Component {
         .then(r => r.json())
         .then(result => {
           this.setState({
-            linkedToGithub: result,
-            compList: {
-              Todos: this.state.components.includes('Todos') ? <Todos /> : null,
-              Weather: this.state.components.includes('Weather') ? (
-                <Weather
-                  desc={this.state.weather.desc}
-                  temp={this.state.weather.temp}
-                  humidity={this.state.weather.humidity}
-                  wind={this.state.weather.wind}
-                  url={this.state.weather.iconUrl}
-                  handleClick={this._handleClick.bind(this)}
-                  // {...props}
-                />
-              ) : null,
-              Notepad: this.state.components.includes('Notepad') ? (
-                <Notepad />
-              ) : null,
-              News: this.state.components.includes('News') ? <News /> : null,
-              Github: this.state.components.includes('GitHub') ? (
-                <Github />
-              ) : null
-            }
+            linkedToGithub: result
+            // compList: [
+            //   this.state.components.includes('Todos') ? <Todos /> : null,
+            //   this.state.components.includes('Weather') ? (
+            //     <Weather
+            //       desc={this.state.weather.desc}
+            //       temp={this.state.weather.temp}
+            //       humidity={this.state.weather.humidity}
+            //       wind={this.state.weather.wind}
+            //       url={this.state.weather.iconUrl}
+            //       handleClick={this._handleClick.bind(this)}
+            //       // {...props}
+            //     />
+            //   ) : null,
+            //   this.state.components.includes('Notepad') ? <Notepad /> : null,
+            //   this.state.components.includes('News') ? <News /> : null,
+            //   this.state.components.includes('GitHub') ? <Github /> : null
+            // ]
           });
         });
     }

@@ -202,6 +202,7 @@ app.post('/preferences', (req, res) => {
   });
   UserComp.getPref(req.session.user.id).then(array => {
     res.send(array);
+    res.redirect('/home');
   });
 });
 

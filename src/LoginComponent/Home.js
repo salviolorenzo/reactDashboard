@@ -12,18 +12,22 @@ class Home extends Component {
   render() {
     return (
       <Router>
-        <div className='landingPage'>
-          <ul>
-            <li>
-              <Link to='/login'>Log in</Link>
-            </li>
-            <li>
-              <Link to='/register'>Register</Link>
-            </li>
-          </ul>
-          <Route path='/login' exact component={Login} />
-          <Route path='/register' exact component={Register} />
-        </div>
+        <>
+          <div className={this.state.className1} />
+          <div className='landingPage'>
+            <ul>
+              <li>
+                <Link to='/login'>Log in</Link>
+              </li>
+              <li>
+                <Link to='/register'>Register</Link>
+              </li>
+            </ul>
+            <Route path='/login' exact render={Login} />
+            <Route path='/register' exact component={Register} />
+          </div>
+          <div className={this.state.className2} />
+        </>
       </Router>
     );
   }
