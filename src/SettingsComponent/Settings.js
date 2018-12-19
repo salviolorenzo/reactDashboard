@@ -13,7 +13,8 @@ class Settings extends Component {
     this.state = {
       user: '',
       term: '',
-      style: {}
+      style: {},
+      linkedToGithub: props.linkedToGithub
     };
   }
 
@@ -126,6 +127,7 @@ class Settings extends Component {
                   handleNameChange={this._handleNameChange.bind(this)}
                   handleEmailChange={this._handleEmailChange.bind(this)}
                   handleUsernameChange={this._handleUsernameChange.bind(this)}
+                  linkedToGithub={this.state.linkedToGithub}
                   {...props}
                 />
               );

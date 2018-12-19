@@ -175,6 +175,10 @@ app.get('/github/data', (req, res) => {
     });
 });
 
+app.get('/github/login/check', (req, res) => {
+  res.send(req.session.token ? true : false);
+});
+
 app.get('/home', protectRoute, (req, res) => {
   res.send();
 });

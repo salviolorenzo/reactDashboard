@@ -75,7 +75,8 @@ class Dashboard extends Component {
       weather: {},
       backgroundUrl: '',
       time: '',
-      components: []
+      components: [],
+      linkedToGithub: false
     };
   }
 
@@ -92,6 +93,15 @@ class Dashboard extends Component {
       });
     console.log(this.state);
     navigator.geolocation.getCurrentPosition(createLocationObject.bind(this));
+    {
+      fetch('/github/login/check')
+        .then(r => r.json())
+        .then(result => {
+          this.setState({
+            linkedToGithub: result
+          });
+        });
+    }
   }
 
   // componentDidUpdate() {
@@ -179,7 +189,17 @@ class Dashboard extends Component {
               }}
             />
 
-            <Route path='/home/settings' component={Settings} />
+            <Route
+              path='/home/settings'
+              render={props => {
+                return (
+                  <Settings
+                    linkedToGithub={this.state.linkedToGithub}
+                    {...props}
+                  />
+                );
+              }}
+            />
 
             {/* <Github /> */}
           </div>

@@ -582,13 +582,13 @@ h2 {
   margin: 0 0 10px 0;
   padding: 10px 0;
   background-color: #333;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   color: white;
 }
 
 .gitHub h4 {
   width: 100%;
-  margin: 10px;
+  margin: 10px 0;
 }
 
 .stat-list {
