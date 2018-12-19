@@ -36,7 +36,7 @@ class Github extends Component {
 
   render() {
     return (
-      <Draggable draggableId='Github' index={4}>
+      <Draggable draggableId='GitHub' index={4}>
         {(provided, snapshot) => (
           <div
             className='gitHub'

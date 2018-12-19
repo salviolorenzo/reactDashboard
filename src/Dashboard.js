@@ -183,9 +183,12 @@ class Dashboard extends Component {
     ) {
       return;
     }
-    const array = Dashboard.state.components;
+    const array = this.state.components;
     array.splice(source.index, 1);
-    array.splice(destination.index, 0, draggableId);
+    array.splice(destination.index, 0, {
+      name: draggableId,
+      index: destination.index
+    });
     this.setState({
       components: array
     });
@@ -206,7 +209,7 @@ class Dashboard extends Component {
           onBeforeDragStart={this.onBeforeDragStart}
           onDragStart={this.onDragStart}
           onDragUpdate={this.onDragUpdate}
-          onDragEnd={this.onDragEnd}
+          onDragEnd={this.onDragEnd.bind(this)}
         >
           <Router>
             <div
