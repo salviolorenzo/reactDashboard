@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Noteslist from './Noteslist';
 import Editor from './Editor';
-import Draggable from 'react-draggable';
+import { Draggable } from 'react-beautiful-dnd';
 
 class Notepad extends Component {
   constructor(props) {

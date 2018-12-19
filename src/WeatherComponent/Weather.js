@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Info from './Info';
+import { Draggable } from 'react-beautiful-dnd';
 
 class Weather extends Component {
   constructor(props) {

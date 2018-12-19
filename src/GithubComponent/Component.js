@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Stats from './Stats';
+import { Draggable } from 'react-beautiful-dnd';
 
 class Github extends Component {
   constructor(props) {

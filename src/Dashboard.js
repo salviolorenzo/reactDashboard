@@ -8,6 +8,7 @@ import Github from './GithubComponent/Component';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './HeaderComponent/Header';
 import Settings from './SettingsComponent/Settings';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 function createBackSplash(url) {
   const style = {
@@ -143,6 +144,22 @@ class Dashboard extends Component {
       });
   }
 
+  onBeforeDragStart() {
+    return;
+  }
+
+  onDragStart() {
+    return;
+  }
+
+  onDragUpdate() {
+    return;
+  }
+
+  onDragEnd() {
+    return;
+  }
+
   render() {
     if (this.state.backgroundUrl === '') {
       return (
@@ -153,57 +170,76 @@ class Dashboard extends Component {
       );
     } else {
       return (
-        <Router>
-          <div
-            className='dashboard'
-            style={createBackSplash(this.state.backgroundUrl)}
-          >
-            <Header />
-            <Route
-              path='/home'
-              exact
-              render={props => {
-                return (
-                  <div className='tiles'>
-                    {this.state.components.includes('Todos') ? <Todos /> : null}
-                    {this.state.components.includes('Weather') ? (
-                      <Weather
-                        desc={this.state.weather.desc}
-                        temp={this.state.weather.temp}
-                        humidity={this.state.weather.humidity}
-                        wind={this.state.weather.wind}
-                        url={this.state.weather.iconUrl}
-                        handleClick={this._handleClick.bind(this)}
-                        {...props}
-                      />
-                    ) : null}
-                    {this.state.components.includes('Notepad') ? (
-                      <Notepad />
-                    ) : null}
-                    {this.state.components.includes('News') ? <News /> : null}
-                    {this.state.components.includes('GitHub') ? (
-                      <Github />
-                    ) : null}
-                  </div>
-                );
-              }}
-            />
-
-            <Route
-              path='/home/settings'
-              render={props => {
-                return (
-                  <Settings
-                    linkedToGithub={this.state.linkedToGithub}
-                    {...props}
+        <DragDropContext
+          onBeforeDragStart={this.onBeforeDragStart}
+          onDragStart={this.onDragStart}
+          onDragUpdate={this.onDragUpdate}
+          onDragEnd={this.onDragEnd}
+        >
+          <Droppable droppableId='droppable-1'>
+            {(provided, snapshot) => (
+              <Router>
+                <div
+                  className='dashboard'
+                  style={createBackSplash(this.state.backgroundUrl)}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  <Header />
+                  <Route
+                    path='/home'
+                    exact
+                    render={props => {
+                      return (
+                        <div className='tiles'>
+                          {this.state.components.includes('Todos') ? (
+                            <Todos />
+                          ) : null}
+                          {this.state.components.includes('Weather') ? (
+                            <Weather
+                              desc={this.state.weather.desc}
+                              temp={this.state.weather.temp}
+                              humidity={this.state.weather.humidity}
+                              wind={this.state.weather.wind}
+                              url={this.state.weather.iconUrl}
+                              handleClick={this._handleClick.bind(this)}
+                              {...props}
+                            />
+                          ) : null}
+                          {this.state.components.includes('Notepad') ? (
+                            <Notepad />
+                          ) : null}
+                          {this.state.components.includes('News') ? (
+                            <News />
+                          ) : null}
+                          {this.state.components.includes('GitHub') ? (
+                            <Github />
+                          ) : null}
+                        </div>
+                      );
+                    }}
                   />
-                );
-              }}
-            />
 
-            {/* <Github /> */}
-          </div>
-        </Router>
+                  <Route
+                    path='/home/settings'
+                    render={props => {
+                      return (
+                        <Settings
+                          linkedToGithub={this.state.linkedToGithub}
+                          checkedBoxes={this.state.components}
+                          {...props}
+                        />
+                      );
+                    }}
+                  />
+
+                  {/* <Github /> */}
+                  {provided.placeholder}
+                </div>
+              </Router>
+            )}
+          </Droppable>
+        </DragDropContext>
       );
     }
   }

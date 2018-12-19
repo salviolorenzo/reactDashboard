@@ -14,7 +14,8 @@ class Settings extends Component {
       user: '',
       term: '',
       style: {},
-      linkedToGithub: props.linkedToGithub
+      linkedToGithub: props.linkedToGithub,
+      checkedBoxes: props.checkedBoxes
     };
   }
 

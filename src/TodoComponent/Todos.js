@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Todolist from './Todolist';
 import Todoform from './Todoform';
-import Draggable from 'react-draggable';
+import { Draggable } from 'react-beautiful-dnd';
+import { DraggableCore } from 'react-draggable';
 
 class Todos extends Component {
   constructor(props) {
@@ -84,21 +85,30 @@ class Todos extends Component {
 
   render() {
     return (
-      <div className='todos'>
-        <h2>Todos</h2>
-        <p>(Click to delete)</p>
-        <Todolist
-          items={this.state.todos}
-          style={this.state.style}
-          handleDelete={this._handleDelete.bind(this)}
-          // handleCheck={this._handleCheck.bind(this)}
-        />
-        <Todoform
-          term={this.state.term}
-          onChange={this._onChange.bind(this)}
-          handleSubmit={this._onSubmit.bind(this)}
-        />
-      </div>
+      <Draggable draggableId='draggable-1' index={0}>
+        {(provided, snapshot) => (
+          <div
+            className='todos'
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <h2>Todos</h2>
+            <p>(Click to delete)</p>
+            <Todolist
+              items={this.state.todos}
+              style={this.state.style}
+              handleDelete={this._handleDelete.bind(this)}
+              // handleCheck={this._handleCheck.bind(this)}
+            />
+            <Todoform
+              term={this.state.term}
+              onChange={this._onChange.bind(this)}
+              handleSubmit={this._onSubmit.bind(this)}
+            />
+          </div>
+        )}
+      </Draggable>
     );
   }
 }

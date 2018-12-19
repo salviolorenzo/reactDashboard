@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Keys from '../config';
 import NewsList from './NewsList';
 import NewsNav from './NewsNav';
+import { Draggable } from 'react-beautiful-dnd';
 
 class News extends Component {
   constructor(props) {
