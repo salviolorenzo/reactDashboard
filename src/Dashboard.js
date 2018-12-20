@@ -60,7 +60,7 @@ function createLocationObject(object) {
           let newArray = object.results.slice(0, 20);
           let ranNum = Math.floor(Math.random() * 10);
           this.setState({
-            backgroundUrl: newArray[ranNum].urls.full
+            backgroundUrl: newArray[ranNum].urls.regular
           });
         });
     });
@@ -78,7 +78,8 @@ class Dashboard extends Component {
       time: '',
       components: [],
       linkedToGithub: false,
-      compList: []
+      compList: [],
+      className: 'curtain'
     };
   }
 
@@ -186,6 +187,12 @@ class Dashboard extends Component {
       components: array
     });
     return;
+  }
+
+  handleEnter() {
+    this.setState({
+      className: 'curtain-down'
+    });
   }
 
   render() {
