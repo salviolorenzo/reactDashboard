@@ -78,13 +78,6 @@ class Dashboard extends Component {
       time: '',
       components: [],
       linkedToGithub: false,
-      draggables: [
-        'draggable-1',
-        'draggable-2',
-        'draggable-3',
-        'draggable-4',
-        'draggable-5'
-      ],
       compList: []
     };
   }

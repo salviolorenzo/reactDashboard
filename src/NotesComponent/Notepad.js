@@ -122,8 +122,7 @@ class Notepad extends Component {
           }
         });
         this.setState({
-          notes: newArray,
-          focus: []
+          notes: newArray
         });
       });
   }

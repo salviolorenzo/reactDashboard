@@ -230,7 +230,7 @@ app.post('/register', (req, res) => {
     console.log(user);
     req.session.user = user;
     console.log(req.session.user);
-    res.redirect('/home');
+    res.redirect('/home/settings/userPreferences');
   });
 });
 

@@ -13,9 +13,6 @@ function Todolist(props) {
             style={props.style}
           >
             {item.content}
-            <div className='checkbox'>
-              <p />
-            </div>
           </li>
         );
       })}
